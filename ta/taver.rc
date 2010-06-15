@@ -1,0 +1,29 @@
+1 VERSIONINFO
+FILEVERSION 1, 0, 0, 0
+PRODUCTVERSION 1,0,0,0
+FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+
+FILEOS VOS__WINDOWS32
+FILETYPE 2
+{
+BLOCK "StringFileInfo"
+ {
+  BLOCK "041904E3"
+  {
+   VALUE "CompanyName", "ООО Эмеральд\000"
+   VALUE "FileDescription", "Главный модуль Троя Авто\000"
+   VALUE "FileVersion", "1.0.0.0\000"
+   VALUE "InternalName", "ta\000"
+   VALUE "LegalCopyright", "ООО Эмеральд 2010\000"
+   VALUE "OriginalFilename", "ta.exe\000"
+   VALUE "ProductName", "Троя Авто\000"
+   VALUE "ProductVersion", "1.0.0.0\000"
+  }
+ }
+
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 1049, 1251
+ }
+}
+

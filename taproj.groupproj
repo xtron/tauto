@@ -1,0 +1,74 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{b5622211-14f0-4c62-ad4a-cfc3dd6a3866}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="tadict\tadict.dproj" />
+    <Projects Include="tafind\tafind.dproj" />
+    <Projects Include="taoptions\taoptions.dproj" />
+    <Projects Include="tareport\tareport.dproj" />
+    <Projects Include="ta\ta.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="ta">
+    <MSBuild Projects="ta\ta.dproj" Targets="" />
+  </Target>
+  <Target Name="ta:Clean">
+    <MSBuild Projects="ta\ta.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="ta:Make">
+    <MSBuild Projects="ta\ta.dproj" Targets="Make" />
+  </Target>
+  <Target Name="tadict">
+    <MSBuild Projects="tadict\tadict.dproj" Targets="" />
+  </Target>
+  <Target Name="tadict:Clean">
+    <MSBuild Projects="tadict\tadict.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="tadict:Make">
+    <MSBuild Projects="tadict\tadict.dproj" Targets="Make" />
+  </Target>
+  <Target Name="tafind">
+    <MSBuild Projects="tafind\tafind.dproj" Targets="" />
+  </Target>
+  <Target Name="tafind:Clean">
+    <MSBuild Projects="tafind\tafind.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="tafind:Make">
+    <MSBuild Projects="tafind\tafind.dproj" Targets="Make" />
+  </Target>
+  <Target Name="taoptions">
+    <MSBuild Projects="taoptions\taoptions.dproj" Targets="" />
+  </Target>
+  <Target Name="taoptions:Clean">
+    <MSBuild Projects="taoptions\taoptions.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="taoptions:Make">
+    <MSBuild Projects="taoptions\taoptions.dproj" Targets="Make" />
+  </Target>
+  <Target Name="tareport">
+    <MSBuild Projects="tareport\tareport.dproj" Targets="" />
+  </Target>
+  <Target Name="tareport:Clean">
+    <MSBuild Projects="tareport\tareport.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="tareport:Make">
+    <MSBuild Projects="tareport\tareport.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="ta;tadict;tafind;taoptions;tareport" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="ta:Clean;tadict:Clean;tafind:Clean;taoptions:Clean;tareport:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="ta:Make;tadict:Make;tafind:Make;taoptions:Make;tareport:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>
