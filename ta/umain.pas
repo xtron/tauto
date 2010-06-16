@@ -22,7 +22,6 @@ type
     aFind: TAction;
     aUserReport: TAction;
     aOrderReport: TAction;
-    aChangeUser: TAction;
     aAbout: TAction;
     procedure Action1Execute(Sender: TObject);
     procedure aOptionsExecute(Sender: TObject);
@@ -45,28 +44,31 @@ var
   FMain: TFMain;
   UID : Integer;
   GID : Integer;
+  Res : Integer;
 implementation
 
 uses
-  UDMain;
+  UDMain, uabout;
 
 {$R *.dfm}
 //Загрузка ДЛЛ-ок---------------------------------------------------------------
-procedure LoadTAModule(aUID,aGID,dbHandle:Integer; dllName, ProcName: PChar);
-var Proc: procedure(aUID,aGID,dbHandle:Integer);stdcall;
+procedure LoadTAModule(aUID,aGID,dbHandle:Integer; var Result:Integer; dllName, ProcName: PChar);
+var Proc: procedure(aUID,aGID,dbHandle:Integer;var Result:Integer);stdcall;
     Handle: THandle;
 begin
   Handle := LoadLibrary(dllName);
   if Handle <> 0 then begin
     @Proc := GetProcAddress(Handle, ProcName);
-    if @Proc <> nil then Proc(aUID,aGID,dbHandle);
+    if @Proc <> nil then Proc(aUID,aGID,dbHandle,Result);
     FreeLibrary(Handle);
   end;
 end;
 //------------------------------------------------------------------------------
 procedure TFMain.aAboutExecute(Sender: TObject);
 begin
- //
+  FABout:=TFABout.Create(self);
+  FAbout.ShowModal;
+  FAbout.Free;
 end;
 //------------------------------------------------------------------------------
 procedure TFMain.aChangeUserExecute(Sender: TObject);
@@ -86,22 +88,22 @@ end;
 //------------------------------------------------------------------------------
 procedure TFMain.aDictExecute(Sender: TObject);
 begin
- LoadTAModule(UID,GID,Integer(DMMain.IBC.dbHandle),'tadict.dll','ta_dict')
+ LoadTAModule(UID,GID,Integer(DMMain.IBC.dbHandle),Res,'tadict.dll','ta_dict')
 end;
 //------------------------------------------------------------------------------
 procedure TFMain.aFindExecute(Sender: TObject);
 begin
- LoadTAModule(UID,GID,Integer(DMMain.IBC.dbHandle),'tafind.dll','ta_find')
+ LoadTAModule(UID,GID,Integer(DMMain.IBC.dbHandle),Res,'tafind.dll','ta_find')
 end;
 //------------------------------------------------------------------------------
 procedure TFMain.aOptionsExecute(Sender: TObject);
 begin
- //
+ LoadTAModule(UID,GID,Integer(DMMain.IBC.dbHandle),Res,'taoptions.dll','ta_options')
 end;
 //------------------------------------------------------------------------------
 procedure TFMain.aOrderReportExecute(Sender: TObject);
 begin
- //
+ LoadTAModule(UID,GID,Integer(DMMain.IBC.dbHandle),Res,'tareport.dll','ta_report_orders')
 end;
 //------------------------------------------------------------------------------
 procedure TFMain.aOrdersExecute(Sender: TObject);
@@ -111,12 +113,12 @@ end;
 //------------------------------------------------------------------------------
 procedure TFMain.aRightsExecute(Sender: TObject);
 begin
- //
+ LoadTAModule(UID,GID,Integer(DMMain.IBC.dbHandle),Res,'taoptions.dll','ta_users')
 end;
 //------------------------------------------------------------------------------
 procedure TFMain.aUserReportExecute(Sender: TObject);
 begin
- //
+ LoadTAModule(UID,GID,Integer(DMMain.IBC.dbHandle),Res,'tareport.dll','ta_report_users')
 end;
 
 end.

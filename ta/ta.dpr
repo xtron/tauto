@@ -1,10 +1,16 @@
 program ta;
 
 uses
-  Forms,Controls,Registry,Windows,SysUtils,Dialogs,
+  Forms,
+  Controls,
+  Registry,
+  Windows,
+  SysUtils,
+  Dialogs,
   umain in 'umain.pas' {FMain},
   UDMain in 'UDMain.pas' {DMMain: TDataModule},
-  ulogin in 'ulogin.pas' {FLogin};
+  ulogin in 'ulogin.pas' {FLogin},
+  uabout in 'uabout.pas' {FABout};
 
 {$R *.res}
 {$R *ver.res}
@@ -71,6 +77,6 @@ begin
   begin
     Application.MainFormOnTaskbar := True;
     Application.CreateForm(TFMain, FMain);
-    Application.Run;
+  Application.Run;
   end;
 end.

@@ -31,6 +31,9 @@
     <DelphiCompile Include="ta.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
+    <DCCReference Include="uabout.pas">
+      <Form>FABout</Form>
+    </DCCReference>
     <DCCReference Include="UDMain.pas">
       <Form>DMMain</Form>
       <DesignClass>TDataModule</DesignClass>

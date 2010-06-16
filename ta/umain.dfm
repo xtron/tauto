@@ -2,7 +2,7 @@ object FMain: TFMain
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
-  Caption = #1058#1088#1086#1103' '#1040#1074#1090#1086' 0.1'
+  Caption = #1058#1088#1086#1103' '#1040#1074#1090#1086' 1.0'
   ClientHeight = 53
   ClientWidth = 643
   Color = clBtnFace
@@ -53,10 +53,6 @@ object FMain: TFMain
         Items = <
           item
             Items = <
-              item
-                Action = aChangeUser
-                ImageIndex = 8
-              end
               item
                 Action = Action1
                 ImageIndex = 0
@@ -131,10 +127,6 @@ object FMain: TFMain
             ImageIndex = 3
           end
           item
-            Action = aChangeUser
-            ImageIndex = 8
-          end
-          item
             Action = Action1
             ImageIndex = 0
           end>
@@ -191,12 +183,6 @@ object FMain: TFMain
       Caption = #1054#1090#1095#1077#1090' '#1087#1086' '#1079#1072#1082#1072#1079#1072#1084
       ImageIndex = 7
       OnExecute = aOrderReportExecute
-    end
-    object aChangeUser: TAction
-      Category = #1057#1080#1089#1090#1077#1084#1072
-      Caption = #1057#1084#1077#1085#1072' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103
-      ImageIndex = 8
-      OnExecute = aChangeUserExecute
     end
     object Action1: TAction
       Category = #1057#1080#1089#1090#1077#1084#1072

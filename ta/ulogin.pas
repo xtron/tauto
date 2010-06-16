@@ -34,7 +34,7 @@ var
 implementation
 
 uses
-  UDMain;
+  UDMain, uabout;
 
 {$R *.dfm}
 

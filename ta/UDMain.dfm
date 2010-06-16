@@ -6,7 +6,8 @@ object DMMain: TDMMain
     DefaultTransaction = IBT
     SQLDialect = 3
     Params.Strings = (
-      'SQL DIALECT=3')
+      'SQL DIALECT=3'
+      'CHARACTER SET=WIN1251')
     Left = 8
     Top = 8
   end
