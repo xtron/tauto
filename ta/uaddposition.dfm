@@ -1,10 +1,9 @@
-object FMain: TFMain
+object FAddPosition: TFAddPosition
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1087#1088#1086#1075#1088#1072#1084#1084#1099
-  ClientHeight = 197
-  ClientWidth = 431
+  ClientHeight = 250
+  ClientWidth = 535
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,58 +11,117 @@ object FMain: TFMain
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poOwnerFormCenter
   PixelsPerInch = 96
   TextHeight = 13
-  object gbPrintOrder: TGroupBox
+  object LPositionName: TLabel
     Left = 8
+    Top = 11
+    Width = 88
+    Height = 13
+    Caption = #1053#1072#1079#1074#1072#1085#1080#1077' '#1076#1077#1090#1072#1083#1080
+  end
+  object LpositionNo: TLabel
+    Left = 8
+    Top = 38
+    Width = 60
+    Height = 13
+    Caption = #1050#1086#1076' '#1076#1077#1090#1072#1083#1080
+  end
+  object LPostID: TLabel
+    Left = 7
+    Top = 119
+    Width = 61
+    Height = 13
+    Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082':'
+  end
+  object LPosCount: TLabel
+    Left = 8
+    Top = 65
+    Width = 64
+    Height = 13
+    Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086':'
+  end
+  object LNote: TLabel
+    Left = 8
+    Top = 173
+    Width = 61
+    Height = 13
+    Caption = #1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
+  end
+  object Label1: TLabel
+    Left = 8
+    Top = 92
+    Width = 78
+    Height = 13
+    Caption = #1057#1090#1086#1080#1084#1086#1089#1090#1100' '#1077#1076'.:'
+  end
+  object Label2: TLabel
+    Left = 7
+    Top = 146
+    Width = 36
+    Height = 13
+    Caption = #1057#1090#1072#1090#1091#1089
+  end
+  object EPositionName: TUdcEdit
+    Left = 102
     Top = 8
-    Width = 417
-    Height = 153
-    Caption = #1055#1077#1095#1072#1090#1100' '#1073#1083#1072#1085#1082#1072' '#1079#1072#1082#1072#1079#1072
+    Width = 427
+    Height = 21
+    CharCase = ecUpperCase
+    MaxLength = 100
     TabOrder = 0
-    object cbShowExcel: TUdcCheckBox
-      Left = 6
-      Top = 16
-      Width = 273
-      Height = 17
-      Caption = #1055#1086#1082#1072#1079#1099#1074#1072#1090#1100' '#1074' Excel '#1087#1077#1088#1077#1076' '#1087#1077#1095#1072#1090#1100#1102
-      Alignment.Alignment = agTopLeft
-      Alignment.Spacing = 4
-      TabOrder = 0
-    end
-    object gbInfo: TGroupBox
-      Left = 2
-      Top = 44
-      Width = 413
-      Height = 107
-      Align = alBottom
-      Caption = #1055#1086#1103#1089#1085#1077#1085#1080#1103' '#1082#1083#1080#1077#1085#1090#1091
-      TabOrder = 1
-      object MInfo: TMemo
-        Left = 2
-        Top = 15
-        Width = 409
-        Height = 90
-        Align = alClient
-        ScrollBars = ssHorizontal
-        TabOrder = 0
-      end
-    end
+  end
+  object EPositionNo: TUdcEdit
+    Left = 103
+    Top = 35
+    Width = 426
+    Height = 21
+    CharCase = ecUpperCase
+    MaxLength = 100
+    TabOrder = 1
+  end
+  object cbPostID: TUdcComboBox
+    Left = 102
+    Top = 116
+    Width = 427
+    Height = 21
+    Style = csDropDownList
+    CharCase = ecUpperCase
+    ItemHeight = 13
+    MaxLength = 100
+    TabOrder = 4
+  end
+  object EPosCount: TUdcEdit
+    Left = 103
+    Top = 62
+    Width = 426
+    Height = 21
+    CharCase = ecUpperCase
+    TabOrder = 2
+    Text = '1'
+    OnKeyPress = EPosCountKeyPress
+    IsNumerical = True
+  end
+  object ENote: TUdcEdit
+    Left = 102
+    Top = 170
+    Width = 427
+    Height = 21
+    CharCase = ecUpperCase
+    MaxLength = 100
+    TabOrder = 6
   end
   object pOrderControl: TUdcPanel
     Left = 0
-    Top = 164
-    Width = 431
+    Top = 197
+    Width = 535
     Height = 33
     Align = alBottom
     BevelInner = bvLowered
-    TabOrder = 1
-    ExplicitLeft = -107
-    ExplicitTop = 197
-    ExplicitWidth = 535
+    TabOrder = 7
     object bSave: TPngBitBtn
-      Left = 239
+      Left = 344
       Top = 5
       Width = 90
       Height = 25
@@ -72,7 +130,7 @@ object FMain: TFMain
       TabOrder = 0
     end
     object bCancel: TPngBitBtn
-      Left = 335
+      Left = 440
       Top = 5
       Width = 90
       Height = 25
@@ -81,21 +139,44 @@ object FMain: TFMain
       TabOrder = 1
     end
   end
-  object ActionList: TActionList
-    Images = PngImageList
-    Left = 8
-    Top = 8
-    object aCancel: TAction
-      Caption = #1054#1090#1084#1077#1085#1072
-      ImageIndex = 1
-      ShortCut = 27
-      OnExecute = aCancelExecute
-    end
-    object aSave: TAction
-      Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
-      ImageIndex = 0
-      OnExecute = aSaveExecute
-    end
+  object cCost: TUdcCalcEdit
+    Left = 103
+    Top = 89
+    Width = 426
+    Height = 21
+    AutoSize = False
+    CheckOnExit = True
+    DisplayFormat = ',0.00'#1088#39'.'#39';-,0.00'#1088#39'.'#39
+    NumGlyphs = 2
+    TabOrder = 3
+  end
+  object cbStatus: TUdcComboBox
+    Left = 103
+    Top = 143
+    Width = 426
+    Height = 21
+    Style = csDropDownList
+    CharCase = ecUpperCase
+    ItemHeight = 13
+    ItemIndex = 0
+    TabOrder = 5
+    Text = #1053#1045' '#1054#1041#1056#1040#1041#1054#1058#1040#1053#1054
+    Items.Strings = (
+      #1053#1045' '#1054#1041#1056#1040#1041#1054#1058#1040#1053#1054
+      #1047#1040#1050#1040#1047#1040#1053#1054
+      #1054#1058#1055#1056#1040#1042#1051#1045#1053#1054
+      #1042#1067#1044#1040#1053#1054' '#1050#1051#1048#1045#1053#1058#1059)
+  end
+  object pUserFio: TUdcPanel
+    Left = 0
+    Top = 230
+    Width = 535
+    Height = 20
+    Align = alBottom
+    Alignment = taLeftJustify
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    TabOrder = 8
   end
   object PngImageList: TPngImageList
     PngImages = <
@@ -154,5 +235,21 @@ object FMain: TFMain
     Left = 16
     Top = 72
     Bitmap = {}
+  end
+  object ActionList: TActionList
+    Images = PngImageList
+    Left = 8
+    Top = 8
+    object aCancel: TAction
+      Caption = #1054#1090#1084#1077#1085#1072
+      ImageIndex = 1
+      ShortCut = 27
+      OnExecute = aCancelExecute
+    end
+    object aSave: TAction
+      Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      ImageIndex = 0
+      OnExecute = aSaveExecute
+    end
   end
 end

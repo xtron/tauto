@@ -7,10 +7,16 @@ uses
   Windows,
   SysUtils,
   Dialogs,
+  Classes,
   umain in 'umain.pas' {FMain},
   UDMain in 'UDMain.pas' {DMMain: TDataModule},
   ulogin in 'ulogin.pas' {FLogin},
-  uabout in 'uabout.pas' {FABout};
+  uabout in 'uabout.pas' {FABout},
+  uclients in 'uclients.pas' {FClients},
+  addorder in 'addorder.pas' {FAddOrders},
+  uaddposition in 'uaddposition.pas' {FAddPosition},
+  uorders in 'uorders.pas' {FOrders},
+  uhistory in 'uhistory.pas' {FHistory};
 
 {$R *.res}
 {$R *ver.res}
@@ -41,7 +47,7 @@ begin
    DMMain.IBC.Connect;
    //Если законнектились, получаем список активных пользователей
    FLogin:=TFLogin.Create(DMMain);
-   DMMain.TempQ.SQL.Text:='SELECT * FROM TA_USERS WHERE ISACTIVE=1';
+   DMMain.TempQ.SQL.Text:='SELECT * FROM TA_USERS WHERE ISACTIVE=1 AND USERID>0';
    DMMain.TempQ.Open;
    DMmain.TempQ.First;
    //Строим список доступных пользователей в форме логина
@@ -60,13 +66,69 @@ begin
     UID:=FLogin.Tag;
     if UID>0 then
     begin
-      DMMain.TempQ.SQL.Text:='SELECT USERROLE FROM TA_USERS WHERE USERID=:UID';
+      DMMain.TempQ.SQL.Text:='SELECT GROUPID FROM TA_USERS WHERE USERID=:UID';
       DMMain.TempQ.Open;
-      GID:=DMMain.TempQ.FieldByName('USERROLE').AsInteger;
+      GID:=DMMain.TempQ.FieldByName('GROUPID').AsInteger;
       DMMain.TempQ.Close;
     end else GID:=UID;
    end;
    Flogin.Free;
+   //--------Загрузка динамических справочников---------------------------------
+   DMMain.FNameList:=TStringList.Create;
+   DMMain.MNameList:=TStringList.Create;
+   DMMain.CarMarksList:=TStringList.Create;
+   DMMain.PostList:=TStringList.Create;
+   DMMain.TempQ.SQL.Text:='SELECT MNAMEID,MNAME FROM MNAME';
+   DMMain.TempQ.Open;
+   while not DMMain.TempQ.Eof do
+   begin
+     DMMain.MNameList.AddObject(DMMain.TempQ.FieldByName('MNAME').AsString,
+                                TObject(DMMain.TempQ.FieldByName('MNAMEID').AsInteger)
+
+     );
+     DMMain.TempQ.Next;
+   end;
+   DMMain.TempQ.Close;
+
+   DMMain.TempQ.SQL.Text:='SELECT FNAMEID,FNAME FROM FNAME';
+   DMMain.TempQ.Open;
+   while not DMMain.TempQ.Eof do
+   begin
+     DMMain.FNameList.AddObject(DMMain.TempQ.FieldByName('FNAME').AsString,
+                                TObject(DMMain.TempQ.FieldByName('FNAMEID').AsInteger)
+
+     );
+     DMMain.TempQ.Next;
+   end;
+   DMMain.TempQ.Close;
+
+   DMMain.TempQ.SQL.Text:='SELECT CARMARKSID,CARMARKS FROM CARMARKS';
+   DMMain.TempQ.Open;
+   while not DMMain.TempQ.Eof do
+   begin
+     DMMain.CarMarksList.AddObject(DMMain.TempQ.FieldByName('CARMARKS').AsString,
+                                TObject(DMMain.TempQ.FieldByName('CARMARKSID').AsInteger)
+
+     );
+     DMMain.TempQ.Next;
+   end;
+
+   DMMain.TempQ.Close;
+   DMMain.TempQ.SQL.Text:='SELECT POSTID,POST FROM POST WHERE ISACTIVE=1';
+   DMMain.TempQ.Open;
+   while not DMMain.TempQ.Eof do
+   begin
+     DMMain.PostList.AddObject(DMMain.TempQ.FieldByName('POST').AsString,
+                                TObject(DMMain.TempQ.FieldByName('POSTID').AsInteger)
+
+     );
+     DMMain.TempQ.Next;
+   end;
+   DMMain.TempQ.Close;
+
+//-----------------------------------------------------------------------------
+
+
   except //Если не подключились - выводим ошибку
     on E:Exception do MessageDlg('Ошибка подключения'+#13+E.Message , mtError, [mbOK], 0);
   end;
@@ -77,6 +139,7 @@ begin
   begin
     Application.MainFormOnTaskbar := True;
     Application.CreateForm(TFMain, FMain);
+  Application.CreateForm(TFOrders, FOrders);
   Application.Run;
   end;
 end.

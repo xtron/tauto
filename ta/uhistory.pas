@@ -1,15 +1,15 @@
-unit uabout;
+unit uhistory;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, LMDPNGImage, ExtCtrls;
+  Dialogs, Grids, IB_Grid, UdcIB_Grid;
 
 type
-  TFABout = class(TForm)
-    LInfo: TLabel;
-    ILogo: TImage;
+  TFHistory = class(TForm)
+    gOrdersDateH: TUdcIB_Grid;
+    gOrdersDateHAdd: TUdcIB_Grid;
   private
     { Private declarations }
   public
@@ -17,9 +17,12 @@ type
   end;
 
 var
-  FABout: TFABout;
+  FHistory: TFHistory;
 
 implementation
+
+uses
+  UDMain;
 
 {$R *.dfm}
 

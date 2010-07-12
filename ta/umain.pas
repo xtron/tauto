@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ActnList, ImgList, PngImageList, ActnCtrls, ToolWin, ActnMan,
-  ActnMenus, XPStyleActnCtrls;
+  ActnMenus, XPStyleActnCtrls, XPMan;
 
 type
   TFMain = class(TForm)
@@ -13,42 +13,45 @@ type
     ActionMainMenuBar: TActionMainMenuBar;
     ActionToolBar1: TActionToolBar;
     PngImageList: TPngImageList;
-    Action1: TAction;
+    aExit: TAction;
     aClients: TAction;
     aOrders: TAction;
     aDict: TAction;
     aOptions: TAction;
     aRights: TAction;
-    aFind: TAction;
     aUserReport: TAction;
     aOrderReport: TAction;
     aAbout: TAction;
-    procedure Action1Execute(Sender: TObject);
+    XPManifest: TXPManifest;
+    procedure aExitExecute(Sender: TObject);
     procedure aOptionsExecute(Sender: TObject);
     procedure aRightsExecute(Sender: TObject);
     procedure aUserReportExecute(Sender: TObject);
     procedure aOrderReportExecute(Sender: TObject);
     procedure aOrdersExecute(Sender: TObject);
-    procedure aFindExecute(Sender: TObject);
     procedure aClientsExecute(Sender: TObject);
     procedure aDictExecute(Sender: TObject);
     procedure aChangeUserExecute(Sender: TObject);
     procedure aAboutExecute(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
+procedure LoadTAModule(aUID,aGID,dbHandle:Integer; var Result:Integer; dllName, ProcName: PChar);
 
 var
   FMain: TFMain;
   UID : Integer;
   GID : Integer;
   Res : Integer;
+
 implementation
 
 uses
-  UDMain, uabout;
+  UDMain, uabout, uclients, uorders;
 
 {$R *.dfm}
 //Загрузка ДЛЛ-ок---------------------------------------------------------------
@@ -78,10 +81,15 @@ end;
 //------------------------------------------------------------------------------
 procedure TFMain.aClientsExecute(Sender: TObject);
 begin
-//
+ FClients:=TFClients.Create(self);
+
+ FClients.cbFName.Items.Assign(DMMain.FNameList);
+ FClients.cbMName.Items.Assign(DMMain.MNameList);
+ FClients.ShowModal;
+ FClients.Free;
 end;
 //------------------------------------------------------------------------------
-procedure TFMain.Action1Execute(Sender: TObject);
+procedure TFMain.aExitExecute(Sender: TObject);
 begin
  Close
 end;
@@ -89,11 +97,6 @@ end;
 procedure TFMain.aDictExecute(Sender: TObject);
 begin
  LoadTAModule(UID,GID,Integer(DMMain.IBC.dbHandle),Res,'tadict.dll','ta_dict')
-end;
-//------------------------------------------------------------------------------
-procedure TFMain.aFindExecute(Sender: TObject);
-begin
- LoadTAModule(UID,GID,Integer(DMMain.IBC.dbHandle),Res,'tafind.dll','ta_find')
 end;
 //------------------------------------------------------------------------------
 procedure TFMain.aOptionsExecute(Sender: TObject);
@@ -108,7 +111,8 @@ end;
 //------------------------------------------------------------------------------
 procedure TFMain.aOrdersExecute(Sender: TObject);
 begin
- //
+ FOrders.Show;
+
 end;
 //------------------------------------------------------------------------------
 procedure TFMain.aRightsExecute(Sender: TObject);
@@ -119,6 +123,17 @@ end;
 procedure TFMain.aUserReportExecute(Sender: TObject);
 begin
  LoadTAModule(UID,GID,Integer(DMMain.IBC.dbHandle),Res,'tareport.dll','ta_report_users')
+end;
+
+procedure TFMain.FormCreate(Sender: TObject);
+begin
+
+ DMMain.LoadGrants('TA',integer(self),GID);
+end;
+
+procedure TFMain.FormResize(Sender: TObject);
+begin
+ Height:=85
 end;
 
 end.

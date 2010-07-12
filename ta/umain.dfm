@@ -3,11 +3,11 @@ object FMain: TFMain
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = #1058#1088#1086#1103' '#1040#1074#1090#1086' 1.0'
-  ClientHeight = 53
+  ClientHeight = 51
   ClientWidth = 643
   Color = clBtnFace
-  Constraints.MaxHeight = 87
-  Constraints.MinHeight = 80
+  Constraints.MaxHeight = 85
+  Constraints.MinHeight = 85
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -15,6 +15,8 @@ object FMain: TFMain
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnCreate = FormCreate
+  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object ActionMainMenuBar: TActionMainMenuBar
@@ -54,7 +56,7 @@ object FMain: TFMain
           item
             Items = <
               item
-                Action = Action1
+                Action = aExit
                 ImageIndex = 0
               end>
             Caption = #1057#1080#1089#1090#1077#1084#1072
@@ -64,10 +66,6 @@ object FMain: TFMain
               item
                 Action = aOrders
                 ImageIndex = 2
-              end
-              item
-                Action = aFind
-                ImageIndex = 6
               end
               item
                 Action = aClients
@@ -115,10 +113,6 @@ object FMain: TFMain
             ImageIndex = 2
           end
           item
-            Action = aFind
-            ImageIndex = 6
-          end
-          item
             Action = aClients
             ImageIndex = 1
           end
@@ -127,7 +121,7 @@ object FMain: TFMain
             ImageIndex = 3
           end
           item
-            Action = Action1
+            Action = aExit
             ImageIndex = 0
           end>
         ActionBar = ActionToolBar1
@@ -141,12 +135,6 @@ object FMain: TFMain
       Caption = #1047#1072#1082#1072#1079#1099
       ImageIndex = 2
       OnExecute = aOrdersExecute
-    end
-    object aFind: TAction
-      Category = #1056#1072#1073#1086#1090#1072
-      Caption = #1055#1086#1080#1089#1082
-      ImageIndex = 6
-      OnExecute = aFindExecute
     end
     object aClients: TAction
       Category = #1056#1072#1073#1086#1090#1072
@@ -184,11 +172,11 @@ object FMain: TFMain
       ImageIndex = 7
       OnExecute = aOrderReportExecute
     end
-    object Action1: TAction
+    object aExit: TAction
       Category = #1057#1080#1089#1090#1077#1084#1072
       Caption = #1042#1099#1093#1086#1076
       ImageIndex = 0
-      OnExecute = Action1Execute
+      OnExecute = aExitExecute
     end
     object aAbout: TAction
       Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
@@ -719,5 +707,9 @@ object FMain: TFMain
     Left = 552
     Top = 24
     Bitmap = {}
+  end
+  object XPManifest: TXPManifest
+    Left = 480
+    Top = 24
   end
 end

@@ -31,18 +31,33 @@
     <DelphiCompile Include="ta.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
+    <DCCReference Include="addorder.pas">
+      <Form>FAddOrders</Form>
+    </DCCReference>
     <DCCReference Include="uabout.pas">
       <Form>FABout</Form>
+    </DCCReference>
+    <DCCReference Include="uaddposition.pas">
+      <Form>FAddPosition</Form>
+    </DCCReference>
+    <DCCReference Include="uclients.pas">
+      <Form>FClients</Form>
     </DCCReference>
     <DCCReference Include="UDMain.pas">
       <Form>DMMain</Form>
       <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="uhistory.pas">
+      <Form>FHistory</Form>
     </DCCReference>
     <DCCReference Include="ulogin.pas">
       <Form>FLogin</Form>
     </DCCReference>
     <DCCReference Include="umain.pas">
       <Form>FMain</Form>
+    </DCCReference>
+    <DCCReference Include="uorders.pas">
+      <Form>FOrders</Form>
     </DCCReference>
   </ItemGroup>
 </Project>
