@@ -86,6 +86,7 @@ object FAddPosition: TFAddPosition
     Top = 116
     Width = 427
     Height = 21
+    AutoCompleteDelay = 1500
     Style = csDropDownList
     CharCase = ecUpperCase
     ItemHeight = 13
@@ -144,6 +145,8 @@ object FAddPosition: TFAddPosition
     Top = 89
     Width = 426
     Height = 21
+    Margins.Left = 4
+    Margins.Top = 1
     AutoSize = False
     CheckOnExit = True
     DisplayFormat = ',0.00'#1088#39'.'#39';-,0.00'#1088#39'.'#39
@@ -155,6 +158,7 @@ object FAddPosition: TFAddPosition
     Top = 143
     Width = 426
     Height = 21
+    AutoCompleteDelay = 1500
     Style = csDropDownList
     CharCase = ecUpperCase
     ItemHeight = 13

@@ -65,7 +65,6 @@ object FAddUser: TFAddUser
     Top = 56
     Width = 202
     Height = 21
-    CharCase = ecUpperCase
     MaxLength = 50
     PasswordChar = '*'
     TabOrder = 2
@@ -88,9 +87,6 @@ object FAddUser: TFAddUser
     Align = alBottom
     BevelInner = bvLowered
     TabOrder = 4
-    ExplicitLeft = -170
-    ExplicitTop = 151
-    ExplicitWidth = 509
     DesignSize = (
       320
       33)
@@ -103,7 +99,6 @@ object FAddUser: TFAddUser
       Anchors = [akTop, akRight]
       Caption = #1054#1050
       TabOrder = 0
-      ExplicitLeft = 319
     end
     object bCancel: TPngBitBtn
       Left = 226
@@ -114,7 +109,6 @@ object FAddUser: TFAddUser
       Anchors = [akTop, akRight]
       Caption = #1054#1090#1084#1077#1085#1072
       TabOrder = 1
-      ExplicitLeft = 415
     end
   end
   object PngImageList: TPngImageList

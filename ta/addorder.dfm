@@ -97,7 +97,7 @@ object FAddOrders: TFAddOrders
       Caption = #1050#1091#1079#1086#1074' '#8470':'
     end
     object LVin: TLabel
-      Left = 579
+      Left = 535
       Top = 65
       Width = 21
       Height = 13
@@ -125,6 +125,7 @@ object FAddOrders: TFAddOrders
       Top = 61
       Width = 178
       Height = 21
+      AutoCompleteDelay = 1500
       Style = csDropDownList
       ItemHeight = 13
       MaxLength = 50
@@ -222,9 +223,9 @@ object FAddOrders: TFAddOrders
       TabOrder = 7
     end
     object eVin: TUdcEdit
-      Left = 606
+      Left = 579
       Top = 61
-      Width = 80
+      Width = 107
       Height = 21
       CharCase = ecUpperCase
       MaxLength = 50
@@ -233,7 +234,7 @@ object FAddOrders: TFAddOrders
     object EModel: TUdcEdit
       Left = 319
       Top = 61
-      Width = 254
+      Width = 210
       Height = 21
       CharCase = ecUpperCase
       MaxLength = 50
@@ -395,6 +396,8 @@ object FAddOrders: TFAddOrders
       Top = 32
       Width = 131
       Height = 21
+      Margins.Left = 4
+      Margins.Top = 1
       AutoSize = False
       CheckOnExit = True
       DisplayFormat = ',0.00'#1088#39'.'#39';-,0.00'#1088#39'.'#39
