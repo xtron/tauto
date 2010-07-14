@@ -360,8 +360,16 @@ begin
  FAddorders.Free;
 end;
 procedure TFClients.aPrintOrderExecute(Sender: TObject);
+var
+    TempDir: String;
+    Buffer : PChar;
 begin
-   DMMain.ta_extractres(PAnsiChar('tareport.dll'), PAnsiChar('XLS_ORDER'), PAnsiChar('order.xls'));
+    getmem(Buffer,MAX_PATH);
+    GetTempPath(Max_PATH,Buffer);
+    TempDir:=Buffer;
+    freemem(Buffer,MAX_PATH);
+
+   DMMain.ta_extractres(PAnsiChar('tareport.dll'), PAnsiChar('XLS_ORDER'), PAnsiChar(TempDir+ 'order.xls'));
    DMMain.ta_printorder( DMMain.OrdersQ.FieldByName('ORDERID').AsInteger);
 end;
 

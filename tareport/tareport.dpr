@@ -177,6 +177,8 @@ var IXLSApp: TExcelApplication;
     TRANSMISSION,DRIVE: Array[0..2] of String[10];
     OrderSum,Avance:Real;
     OrderVisible: Boolean;
+    TempDir: String;
+    Buffer : PChar;
 procedure ShowExcel;
 begin
   if Assigned(IXLSApp) then begin
@@ -219,8 +221,13 @@ try
       IXLSApp.ConnectKind := ckNewInstance;
       IXLSApp.Connect;
     end;
+    getmem(Buffer,MAX_PATH);
+    GetTempPath(Max_PATH,Buffer);
+    TempDir:=Buffer;
+    freemem(Buffer,MAX_PATH);
+
     IXLSApp.DisplayAlerts[0] := False;
-    IWorkbook := IXLSApp.Workbooks.Add(ExtractFileDir(ParamStr(0))+ '\order.xls', 0);
+    IWorkbook := IXLSApp.Workbooks.Add(TempDir+ 'order.xls', 0);
     ISheet := IWorkbook.Worksheets.Item[1] as ExcelWorksheet;
     for I := 0 to 1 do
     begin

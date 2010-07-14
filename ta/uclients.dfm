@@ -147,7 +147,7 @@ object FClients: TFClients
         Top = 34
         Width = 243
         Height = 21
-        AutoCompleteDelay = 1500
+        AutoCompleteDelay = 5000
         Style = csDropDownList
         ItemHeight = 13
         Sorted = True
@@ -158,7 +158,7 @@ object FClients: TFClients
         Top = 57
         Width = 243
         Height = 21
-        AutoCompleteDelay = 1500
+        AutoCompleteDelay = 5000
         Style = csDropDownList
         ItemHeight = 13
         Sorted = True
