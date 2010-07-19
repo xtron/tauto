@@ -119,15 +119,13 @@ object FOrders: TFOrders
       Height = 21
       Style = csDropDownList
       ItemHeight = 13
-      ItemIndex = 0
       TabOrder = 2
-      Text = #1042#1057#1045
       OnChange = cbStatusChange
       Items.Strings = (
         #1042#1057#1045
         #1058#1045#1050#1059#1065#1048#1045
         #1054#1058#1052#1045#1053#1045#1053#1053#1067#1045
-        #1047#1040#1050#1056#1067#1058#1067#1045)
+        #1042#1067#1055#1054#1051#1053#1045#1053#1053#1067#1045)
     end
   end
   object gOrders: TUdcIB_Grid

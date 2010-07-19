@@ -368,9 +368,9 @@ begin
     GetTempPath(Max_PATH,Buffer);
     TempDir:=Buffer;
     freemem(Buffer,MAX_PATH);
-
-   DMMain.ta_extractres(PAnsiChar('tareport.dll'), PAnsiChar('XLS_ORDER'), PAnsiChar(TempDir+ 'order.xls'));
-   DMMain.ta_printorder( DMMain.OrdersQ.FieldByName('ORDERID').AsInteger);
+    DeleteFile(PansiChar(TempDir+ 'order.xls'));
+    DMMain.ta_extractres(PAnsiChar('tareport.dll'), PAnsiChar('XLS_ORDER'), PAnsiChar(TempDir+ 'order.xls'));
+    DMMain.ta_printorder( DMMain.OrdersQ.FieldByName('ORDERID').AsInteger);
 end;
 
 //Сохранение редактирования либо добавления клиента-----------------------------
@@ -381,6 +381,7 @@ begin
   if Length(ELName.Text)=0 then begin MessageDlg('Введите фамилию клиента', mtWarning, [mbOK], 0);ELName.SetFocus; exit end;
   if cbFname.ItemIndex<0   then begin MessageDlg('Введите имя клиента', mtWarning, [mbOK], 0);cbFName.SetFocus; exit end;
   if cbMname.ItemIndex<0   then begin MessageDlg('Введите отчество клиента', mtWarning, [mbOK], 0); cbMName.SetFocus; exit end;
+  if Length(ECONTACTS.Text)<0 then begin MessageDlg('Введите контакную информацию клиента', mtWarning, [mbOK], 0);ELName.SetFocus; exit end;
   ClientID:=ELName.Tag; //Получаем номер клиента из тэга
   case mode of
    adding  : begin  //Добавляем клиента

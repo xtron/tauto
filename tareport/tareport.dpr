@@ -179,6 +179,8 @@ var IXLSApp: TExcelApplication;
     OrderVisible: Boolean;
     TempDir: String;
     Buffer : PChar;
+    posno: string;
+    K:integer;
 procedure ShowExcel;
 begin
   if Assigned(IXLSApp) then begin
@@ -226,6 +228,7 @@ try
     TempDir:=Buffer;
     freemem(Buffer,MAX_PATH);
 
+ 
     IXLSApp.DisplayAlerts[0] := False;
     IWorkbook := IXLSApp.Workbooks.Add(TempDir+ 'order.xls', 0);
     ISheet := IWorkbook.Worksheets.Item[1] as ExcelWorksheet;
@@ -291,23 +294,30 @@ try
     OrderSum:=0;
     for I := 0 to DMMain.TempQ.RecordCount - 1 do
     begin
+     if I>0 then K:=1 else K:=0;
+     
      for J := 0 to  1 do
        begin
         if J>0  then  S:='1' else S:='';
         IRange := ISheet.Range['DETAIL'+S,EmptyParam];
         if I>0 then OleVariant(IRange).EntireRow.Insert(Shift := xlDown);
-        IRange:=ISheet.Range['A'+IntToStr(Irange.Row-I), 'E'+IntToStr(Irange.Row-I)];
+        IRange:=ISheet.Range['A'+IntToStr(Irange.Row-K), 'E'+IntToStr(Irange.Row-K)];
         IRange.MergeCells:=True;
         IRange.HorizontalAlignment:=xlLeft;
         IRange.Interior.Color:=clWhite;
-        IRange.FormulaR1C1:=DMMain.TempQ.FieldByName('P.POSITIONNAME').AsString;
+
+        if (Length(DMMain.TempQ.FieldByName('P.POSITIONNO').AsString)>0)  then
+        posno:= '['+DMMain.TempQ.FieldByName('P.POSITIONNO').AsString+'] ' else posno:='[] ';
+        if j>0 then  posno:='';
+        IRange.FormulaR1C1:=  posno+DMMain.TempQ.FieldByName('P.POSITIONNAME').AsString;
+
         IRange := ISheet.Range['DETAIL'+S,EmptyParam];
-        IRange:=ISheet.Range['F'+IntToStr(Irange.Row-I),EmptyParam];
+        IRange:=ISheet.Range['F'+IntToStr(Irange.Row-K),EmptyParam];
         IRange.HorizontalAlignment:=xlRight;
         IRange.Interior.Color:=clWhite;
         IRange.FormulaR1C1:=DMMain.TempQ.FieldByName('P.POSCOUNT').AsString;
         IRange := ISheet.Range['DETAIL'+S,EmptyParam];
-        IRange:=ISheet.Range['G'+IntToStr(Irange.Row-I), 'H'+IntToStr(Irange.Row-I)];
+        IRange:=ISheet.Range['G'+IntToStr(Irange.Row-K), 'H'+IntToStr(Irange.Row-K)];
         IRange.MergeCells:=True;
         IRange.HorizontalAlignment:=xlRight;
         IRange.Interior.Color:=clWhite;
@@ -322,6 +332,9 @@ try
     IRange.FormulaR1C1:=FloatToStr(OrderSum);
     IRange := ISheet.Range['DOPLATA',EmptyParam];
     IRange.FormulaR1C1:=FloatToStr(OrderSum-Avance);
+    IRange := ISheet.Range['DOPLATA1',EmptyParam];
+    IRange.FormulaR1C1:=FloatToStr(OrderSum-Avance);
+
     DMMain.TempQ.Close;
     DMMain.TempQ.SQL.Text:='SELECT * FROM OPTIONS WHERE OPTIONSID=1';
     DMMain.TempQ.Open;

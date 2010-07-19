@@ -88,8 +88,20 @@ begin
 end;
 
 procedure TFOrders.aPrintExecute(Sender: TObject);
+var
+    TempDir: String;
+    Buffer : PChar;
 begin
-  DMMain.ta_extractres(PAnsiChar('tareport.dll'), PAnsiChar('XLS_ORDER'), PAnsiChar('order.xls'));
+    getmem(Buffer,MAX_PATH);
+    GetTempPath(Max_PATH,Buffer);
+    TempDir:=Buffer;
+    freemem(Buffer,MAX_PATH);
+    try
+   DeleteFile(PansiChar(TempDir+ 'order.xls'));
+    except
+
+    end;
+  DMMain.ta_extractres(PAnsiChar('tareport.dll'), PAnsiChar('XLS_ORDER'), PansiChar(TempDir+ 'order.xls'));
   DMMain.ta_printorder( DMMain.OrdersSumQ.FieldByName('ORDERID').AsInteger);
 end;
 
