@@ -79,7 +79,6 @@ begin
  FClients:=TFClients.Create(self);
 
  FClients.cbFName.Items.Assign(DMMain.FNameList);
- FClients.cbMName.Items.Assign(DMMain.MNameList);
  FClients.LoadClient(DMMain.OrdersSumQ.FieldBYName('CLIENTID').AsInteger);
  DMMain.OrdersQ.Locate('ORDERID',DMMain.OrdersSumQ.FieldBYName('ORDERID').AsInteger,[]);
  FClients.ShowModal;

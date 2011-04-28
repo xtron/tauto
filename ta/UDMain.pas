@@ -3,7 +3,7 @@ unit UDMain;
 interface
 
 uses
-  SysUtils, Classes, IB_Components,Windows;
+  SysUtils, Classes, IB_Components,Windows, IB_Access;
 
 type
   TDMMain = class(TDataModule)
@@ -30,7 +30,7 @@ type
   private
     { Private declarations }
   public
-    FNameList,MNameList,CarMarksList,PostList:TStrings;
+    FNameList,CarMarksList,PostList:TStrings;
     Function GetUserFIO(UserID:Integer): String;
     procedure ta_extractres(DllName,ResName,FExportFileName:Pchar);
     procedure ta_printorder(OrderID:Integer);
@@ -90,7 +90,6 @@ end;
 procedure TDMMain.DataModuleDestroy(Sender: TObject);
 begin
    FNameList.Free;
-   MNameList.Free;
    CarMarksList.Free;
    PostList.Free;
 end;

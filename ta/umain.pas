@@ -84,7 +84,6 @@ begin
  FClients:=TFClients.Create(self);
 
  FClients.cbFName.Items.Assign(DMMain.FNameList);
- FClients.cbMName.Items.Assign(DMMain.MNameList);
  FClients.ShowModal;
  FClients.Free;
 end;

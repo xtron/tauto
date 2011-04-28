@@ -153,17 +153,6 @@ object FClients: TFClients
         Sorted = True
         TabOrder = 1
       end
-      object cbMname: TUdcComboBox
-        Left = 70
-        Top = 57
-        Width = 243
-        Height = 21
-        AutoCompleteDelay = 5000
-        Style = csDropDownList
-        ItemHeight = 13
-        Sorted = True
-        TabOrder = 2
-      end
       object EContacts: TUdcEdit
         Left = 70
         Top = 80
@@ -172,6 +161,15 @@ object FClients: TFClients
         CharCase = ecUpperCase
         MaxLength = 100
         TabOrder = 3
+      end
+      object EMname: TUdcEdit
+        Left = 70
+        Top = 56
+        Width = 243
+        Height = 21
+        CharCase = ecUpperCase
+        MaxLength = 50
+        TabOrder = 2
       end
     end
     object bNewClient: TPngBitBtn

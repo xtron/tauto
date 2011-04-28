@@ -33,7 +33,6 @@ type
     lbContacts: TLabel;
     eLName: TUdcEdit;
     cbFName: TUdcComboBox;
-    cbMname: TUdcComboBox;
     EContacts: TUdcEdit;
     bNewClient: TPngBitBtn;
     bFindClient: TPngBitBtn;
@@ -47,6 +46,7 @@ type
     gOrders: TUdcIB_Grid;
     bHistory: TPngBitBtn;
     aHistory: TAction;
+    EMname: TUdcEdit;
     procedure aAddClientExecute(Sender: TObject);
     procedure aCancelExecute(Sender: TObject);
     procedure aSaveExecute(Sender: TObject);
@@ -104,7 +104,7 @@ begin
     ELname.Tag:=ClientID;
     ELName.Text:=DMMain.TempQ.FieldByName('LNAME').AsString;
     cbFName.ItemIndex:=cbFName.Items.IndexOfObject(TObject(DMMain.TempQ.FieldByName('FNAMEID').AsInteger));
-    cbMName.ItemIndex:=cbMName.Items.IndexOfObject(TObject(DMMain.TempQ.FieldByName('MNAMEID').AsInteger));
+    EMName.Text:=DMMain.TempQ.FieldByName('MNAME').AsString;
     EContacts.Text:=DMMain.TempQ.FieldByName('CONTACTS').AsString;
     pUserFIO.Caption:='Редактировалось: '+ DMMain.GetUserFIO(DMMain.TempQ.FieldByName('USERID').AsInteger);
     pClient.Enabled:=False;
@@ -130,7 +130,7 @@ procedure TFClients.aAddClientExecute(Sender: TObject);
 begin
  ELName.Text:='';
  cbFName.ItemIndex:=-1;
- cbMname.ItemIndex:=-1;
+ EMname.Text:='';
  eContacts.Text:='';
  aAddClient.Enabled:=False;
  aEditClient.Enabled:=False;
@@ -157,7 +157,7 @@ begin
              aAddClient.Enabled:=True;
              ELName.Text:='';
              cbFName.ItemIndex:=-1;
-             cbMname.ItemIndex:=-1;
+             EMname.Text:='';
              eContacts.Text:='';
 
   end;
@@ -185,7 +185,7 @@ begin
   aAddClient.Enabled:=True;
   ELName.Text:='';
   cbFName.ItemIndex:=-1;
-  cbMname.ItemIndex:=-1;
+  EMName.Text:='';
   eContacts.Text:='';
   pClient.Enabled:=False;
   aSave.Enabled:=False;
@@ -229,7 +229,7 @@ begin
  FAddOrders.Caption:='Изменение заказа';
  FAddOrders.pOrderNum.Caption:=DMMain.OrdersQ.FieldByName('ORDERID').AsString;
  FAddOrders.pOrderData.Caption:=DMMain.OrdersQ.FieldByName('ORDERDATE').AsString;
- FAddOrders.pClientInfo.Caption:=eLName.Text+' '+cbFName.Text+' '+cbMName.Text;
+ FAddOrders.pClientInfo.Caption:=eLName.Text+' '+cbFName.Text+' '+EMName.Text;
  FAddOrders.cbCarMarks.Items.Assign(DMMain.CarMarksList);
  FAddOrders.cbCarMarks.ItemIndex:=FaddOrders.cbCarMarks.Items.IndexOfObject(TObject(DMMain.OrdersQ.FieldByName('CARMARKSID').AsInteger));
  FAddOrders.EYear.Text:=DMMain.OrdersQ.FieldByName('CARYEAR').AsString;
@@ -314,7 +314,7 @@ begin
  DMmain.TempQ.Close;
  FAddOrders.pOrderNum.Caption:=IntToStr(OrderID);
  FAddOrders.pOrderData.Caption:=DateToStr(Trunc(Now));
- FAddOrders.pClientInfo.Caption:=eLName.Text+' '+cbFName.Text+' '+cbMName.Text;
+ FAddOrders.pClientInfo.Caption:=eLName.Text+' '+cbFName.Text+' '+EMName.Text;
  FAddOrders.cbCarMarks.Items.Assign(DMMain.CarMarksList);
  if FAddOrders.cbCarMarks.Items.Count>0 then FAddOrders.cbCarMarks.ItemIndex:=0;
  if DMMain.IBT.InTransaction then DMMain.IBT.CommitRetaining;
@@ -380,7 +380,7 @@ begin
   //Проверяем все ли введено
   if Length(ELName.Text)=0 then begin MessageDlg('Введите фамилию клиента', mtWarning, [mbOK], 0);ELName.SetFocus; exit end;
   if cbFname.ItemIndex<0   then begin MessageDlg('Введите имя клиента', mtWarning, [mbOK], 0);cbFName.SetFocus; exit end;
-  if cbMname.ItemIndex<0   then begin MessageDlg('Введите отчество клиента', mtWarning, [mbOK], 0); cbMName.SetFocus; exit end;
+  if Length(EMName.Text)=0   then begin MessageDlg('Введите отчество клиента', mtWarning, [mbOK], 0); EMName.SetFocus; exit end;
   if Length(ECONTACTS.Text)<0 then begin MessageDlg('Введите контакную информацию клиента', mtWarning, [mbOK], 0);ELName.SetFocus; exit end;
   ClientID:=ELName.Tag; //Получаем номер клиента из тэга
   case mode of
@@ -389,15 +389,15 @@ begin
                DMmain.TempQ.Open;
                ClientID:=DMmain.TempQ.FieldByName('CLIENTID').AsInteger;
                DMmain.TempQ.Close;
-               DMMain.TempQ.SQL.Text:='INSERT INTO CLIENTS(CLIENTID,LNAME,FNAMEID,MNAMEID,CONTACTS,USERID) VALUES(:CID,:LNAME,:FNAMEID,:MNAMEID,:CONTACTS,:UID)';
+               DMMain.TempQ.SQL.Text:='INSERT INTO CLIENTS(CLIENTID,LNAME,FNAMEID,MNAME,CONTACTS,USERID) VALUES(:CID,:LNAME,:FNAMEID,:MNAME,:CONTACTS,:UID)';
               end;  //Редактируем клиента
-   editing : DMMain.TempQ.SQL.Text:='UPDATE CLIENTS SET LNAME=:LNAME,FNAMEID=:FNAMEID,MNAMEID=:MNAMEID,CONTACTS=:CONTACTS,USERID=:UID WHERE CLIENTID=:CID';
+   editing : DMMain.TempQ.SQL.Text:='UPDATE CLIENTS SET LNAME=:LNAME,FNAMEID=:FNAMEID,MNAME=:MNAME,CONTACTS=:CONTACTS,USERID=:UID WHERE CLIENTID=:CID';
   end;
   DMMain.TempQ.ParamByName('CID').AsInteger:=ClientID;
   DMMain.TempQ.ParamByName('UID').AsInteger:=UID;
   DMMain.TempQ.ParamByName('LNAME').AsString:=ELName.Text;
   DMMain.TempQ.ParamByName('FNAMEID').AsInteger:=Integer(cbFname.Items.Objects[cbFname.ItemIndex]);
-  DMMain.TempQ.ParamByName('MNAMEID').AsInteger:=Integer(cbMname.Items.Objects[cbMname.ItemIndex]);
+  DMMain.TempQ.ParamByName('MNAME').AsString:=EMName.Text;
   DMMain.TempQ.ParamByName('CONTACTS').AsString:=EContacts.Text;
   DMMain.TempQ.ExecSQL;
   DMMain.TempQ.Close;

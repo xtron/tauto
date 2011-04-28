@@ -75,20 +75,8 @@ begin
    Flogin.Free;
    //--------«агрузка динамических справочников---------------------------------
    DMMain.FNameList:=TStringList.Create;
-   DMMain.MNameList:=TStringList.Create;
    DMMain.CarMarksList:=TStringList.Create;
    DMMain.PostList:=TStringList.Create;
-   DMMain.TempQ.SQL.Text:='SELECT MNAMEID,MNAME FROM MNAME';
-   DMMain.TempQ.Open;
-   while not DMMain.TempQ.Eof do
-   begin
-     DMMain.MNameList.AddObject(DMMain.TempQ.FieldByName('MNAME').AsString,
-                                TObject(DMMain.TempQ.FieldByName('MNAMEID').AsInteger)
-
-     );
-     DMMain.TempQ.Next;
-   end;
-   DMMain.TempQ.Close;
 
    DMMain.TempQ.SQL.Text:='SELECT FNAMEID,FNAME FROM FNAME';
    DMMain.TempQ.Open;
