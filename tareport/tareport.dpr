@@ -1,6 +1,6 @@
 library tareport;
 uses
-  SysUtils,Controls,
+  SysUtils,Controls,Forms,
   Windows,
   ExcelXP,
   OleServer,
@@ -18,7 +18,7 @@ uses
 
 procedure ta_extractres(DllName, ResName, FExportFileName: PChar);stdcall; export;
 var DllHandle, Res, ResHandle: THandle;
-    P: ^Char;
+    P: ^AnsiChar;
     N: Integer;
     FS: TFileStream;
 begin
@@ -78,16 +78,16 @@ begin
     Ex.Insert('ORDERID',DMMain.TempQ.RecordCount-1);
     while not DMMain.TempQ.Eof do
     begin
-      Ex.ToCellStr[Row,Col+00]:=DMMain.TempQ.FieldByName('ORDERID').AsString;
-      Ex.ToCellStr[Row,Col+01]:=DMMain.TempQ.FieldByName('STATUS').AsString;
+      Ex.ToCellStr[Row,Col+00]:=string(DMMain.TempQ.FieldByName('ORDERID').AsString);
+      Ex.ToCellStr[Row,Col+01]:=string(DMMain.TempQ.FieldByName('STATUS').AsString);
       Ex.ToCellData[Row,Col+02]:=DMMain.TempQ.FieldByName('POSCOUNT').AsInteger;
       Ex.ToCellData[Row,Col+03]:=DMMain.TempQ.FieldByName('POSCOUNT_ZAK').AsInteger;
       Ex.ToCellData[Row,Col+04]:=DMMain.TempQ.FieldByName('POSCOUNT_OTPR').AsInteger;
       Ex.ToCellData[Row,Col+05]:=DMMain.TempQ.FieldByName('POSCOUNT_CLIENT').AsInteger;
       Ex.ToCellData[Row,Col+06]:=DMMain.TempQ.FieldByName('ORDERSUM').AsFloat;
       Ex.ToCellData[Row,Col+07]:=DMMain.TempQ.FieldByName('ORDERAVANCE').AsFloat;
-      Ex.ToCellStr[Row,Col+08]:=DMMain.TempQ.FieldByName('ORDERNEWUSER').AsString;
-      Ex.ToCellStr[Row,Col+09]:=DMMain.TempQ.FieldByName('ORDERUSER').AsString;
+      Ex.ToCellStr[Row,Col+08]:=string(DMMain.TempQ.FieldByName('ORDERNEWUSER').AsString);
+      Ex.ToCellStr[Row,Col+09]:=string(DMMain.TempQ.FieldByName('ORDERUSER').AsString);
       inc(Row);
       DMMain.TempQ.Next;
     end;
@@ -135,7 +135,7 @@ begin
     Ex.Insert('USER',DMMain.TempQ.RecordCount-1);
     while not DMMain.TempQ.Eof do
     begin
-      Ex.ToCellStr[Row,Col+00]:=DMMain.TempQ.FieldByName('USERNAME').AsString;   //Ïîëüçîâàòåëü
+      Ex.ToCellStr[Row,Col+00]:=string(DMMain.TempQ.FieldByName('USERNAME').AsString);   //Ïîëüçîâàòåëü
       Ex.ToCellData[Row,Col+01]:=DMMain.TempQ.FieldByName('ORDERS_NEW').AsInteger;
       Ex.ToCellData[Row,Col+02]:=DMMain.TempQ.FieldByName('SUM_PREDSELF').AsInteger;
       Ex.ToCellData[Row,Col+03]:=DMMain.TempQ.FieldByName('SUM_ALLSELF_NEW').AsInteger;
@@ -165,9 +165,9 @@ begin
   Res:=0;
 end;
 
-{$WARN SYMBOL_PLATFORM OFF}
-procedure ta_printorder(orderid,dbHandle:integer);stdcall; export;
-var IXLSApp: TExcelApplication;
+//{$WARN SYMBOL_PLATFORM OFF}
+procedure ta_printorder(orderid,dbHandle:integer;IXLSApp: TExcelApplication);stdcall; export;
+var
     ISheet: ExcelWorksheet;
     IWorkbook: ExcelWorkbook;
     IRange: ExcelRange;
@@ -188,9 +188,11 @@ begin
     if IXLSApp.WindowState[0] = TOLEEnum(ExcelXP.xlMinimized) then
       IXLSApp.WindowState[0] := TOLEEnum(ExcelXP.xlMaximized);
     IXLSApp.ScreenUpdating[0] := True;
+
   end;
 end;
 begin
+
   TRANSMISSION[0]:= 'ÀÊÏÏ';
   TRANSMISSION[1]:= 'ÌÊÏÏ';
   TRANSMISSION[2]:= 'ÂÀÐÈÀÒÎÐ';
@@ -203,7 +205,6 @@ try
    DMMain.IBC.dbHandleShared:=Pointer(dbHandle);
    DMMain.TempQ.SQL.Add('SELECT * FROM CLIENTS C');
    DMMain.TempQ.SQL.Add('LEFT JOIN FNAME ON FNAME.FNAMEID = C.FNAMEID');
-   DMMain.TempQ.SQL.Add('LEFT JOIN MNAME ON MNAME.MNAMEID = C.MNAMEID');
    DMMain.TempQ.SQL.Add('INNER JOIN  ORDERS O ON O.CLIENTID = C.CLIENTID AND O.ORDERID = :OID');
    DMMain.TempQ.ParamByName('OID').AsInteger:=orderid;
    DMMain.TempQ.Open;
@@ -215,20 +216,10 @@ try
    end;
 
    try
-    IXLSApp := TExcelApplication.Create(nil);
-    try
-      IXLSApp.ConnectKind := ckRunningInstance;
-      IXLSApp.Connect;
-    except
-      IXLSApp.ConnectKind := ckNewInstance;
-      IXLSApp.Connect;
-    end;
-    getmem(Buffer,MAX_PATH);
-    GetTempPath(Max_PATH,Buffer);
+    getmem(Buffer,MAX_PATH*sizeOf(PChar));
+    GetTempPath(Max_PATH*sizeOf(PChar),Buffer);
     TempDir:=Buffer;
-    freemem(Buffer,MAX_PATH);
-
- 
+    freemem(Buffer,MAX_PATH*sizeOf(PChar));
     IXLSApp.DisplayAlerts[0] := False;
     IWorkbook := IXLSApp.Workbooks.Add(TempDir+ 'order.xls', 0);
     ISheet := IWorkbook.Worksheets.Item[1] as ExcelWorksheet;
@@ -240,7 +231,7 @@ try
       IRange := ISheet.Range['CLIENTFIO'+S,EmptyParam];
       IRange.FormulaR1C1:= DMMain.TempQ.FieldByName('C.LNAME').AsString+' '+
                          DMMain.TempQ.FieldByName('FNAME.FNAME').AsString+' '+
-                         DMMain.TempQ.FieldByName('MNAME.MNAME').AsString;
+                         DMMain.TempQ.FieldByName('C.MNAME').AsString;
 
       IRange := ISheet.Range['CONTACTS'+S,EmptyParam];
       IRange.FormulaR1C1:= DMMain.TempQ.FieldByName('C.CONTACTS').AsString;
@@ -284,7 +275,6 @@ try
     IRange.FormulaR1C1:=DMMain.TempQ.FieldByName('O.VIN').AsString;
     IRange := ISheet.Range['VINN',EmptyParam];
     IRange.FormulaR1C1:=DMMain.TempQ.FieldByName('O.VIN').AsString;
-
     DMMain.TempQ.Close;
     DMMain.TempQ.SQL.Clear;
     DMMain.TempQ.SQL.Add('SELECT * FROM POSITIONS P WHERE P.ORDERID = :OID ORDER BY POSITIONID DESC');
@@ -307,9 +297,9 @@ try
         IRange.Interior.Color:=clWhite;
 
         if (Length(DMMain.TempQ.FieldByName('P.POSITIONNO').AsString)>0)  then
-        posno:= '['+DMMain.TempQ.FieldByName('P.POSITIONNO').AsString+'] ' else posno:='[] ';
+        posno:= '['+string(DMMain.TempQ.FieldByName('P.POSITIONNO').AsString)+'] ' else posno:='[] ';
         if j>0 then  posno:='';
-        IRange.FormulaR1C1:=  posno+DMMain.TempQ.FieldByName('P.POSITIONNAME').AsString;
+        IRange.FormulaR1C1:=  posno+string(DMMain.TempQ.FieldByName('P.POSITIONNAME').AsString);
 
         IRange := ISheet.Range['DETAIL'+S,EmptyParam];
         IRange:=ISheet.Range['F'+IntToStr(Irange.Row-K),EmptyParam];
@@ -340,12 +330,13 @@ try
     DMMain.TempQ.Open;
     OrderVisible:=DMMain.TempQ.FieldByName('OPTIONS').AsInteger=1;
     DMMain.TempQ.Close;
+
     DMMain.TempQ.SQL.Text:='SELECT * FROM OPTIONS WHERE OPTIONSID=2';
     DMMain.TempQ.Open;
 
     IRange := ISheet.Range['INFO',EmptyParam];
     InfoList:=TStringList.Create;
-    InfoList.Text:=DMMain.TempQ.FieldByName('OPTIONS').AsString;
+    InfoList.Text:=string(DMMain.TempQ.FieldByName('OPTIONS').AsString);
     for I := 1 to InfoList.Count - 1 do  OleVariant(IRange).EntireRow.Insert(Shift := xlDown);
     IRange := ISheet.Range['INFO',EmptyParam];
     for I := 0 to InfoList.Count - 1 do
@@ -356,10 +347,13 @@ try
      IRange.FormulaR1C1:=InfoList[I];
     end;
     InfoList.Free;
+
+    ShowExcel;
     if OrderVisible then ShowExcel else
     begin
       ISheet.PrintOut(EmptyParam, EmptyParam, 1, False, EmptyParam, EmptyParam, True, EmptyParam, 0);
       IWorkbook.Close(False, EmptyParam, EmptyParam, 0);
+      IXLSApp.Visible[0]:=False;
       IRange := nil;
       ISheet := nil;
       IWorkbook := nil;

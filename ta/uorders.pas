@@ -4,9 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, Grids, IB_Grid, UdcIB_Grid, UdcPanel, ComCtrls, ImgList,
+  Dialogs, ExtCtrls, Grids, IB_Grid, UdcIB_Grid, ComCtrls, ImgList,
   PngImageList, XPStyleActnCtrls, ActnList, ActnMan, StdCtrls, Buttons,
-  PngBitBtn, Mask, ToolEdit, UdcDateEdit, UdcComboBox,IB_Components;
+  PngBitBtn, Mask,  UdcDateEdit, UdcComboBox,IB_Components, rxToolEdit, UdcPanel;
 
 type
   TFOrders = class(TForm)
@@ -89,19 +89,19 @@ end;
 procedure TFOrders.aPrintExecute(Sender: TObject);
 var
     TempDir: String;
-    Buffer : PChar;
+    Buffer : PWideChar;
 begin
-    getmem(Buffer,MAX_PATH);
-    GetTempPath(Max_PATH,Buffer);
+    getmem(Buffer,MAX_PATH*sizeof(PWideChar));
+    GetTempPath(Max_PATH*sizeof(PWideChar),Buffer);
     TempDir:=Buffer;
-    freemem(Buffer,MAX_PATH);
+    freemem(Buffer,MAX_PATH*sizeof(PWideChar));
     try
-   DeleteFile(PansiChar(TempDir+ 'order.xls'));
+   DeleteFile(PChar(TempDir+ 'order.xls'));
     except
 
     end;
-  DMMain.ta_extractres(PAnsiChar('tareport.dll'), PAnsiChar('XLS_ORDER'), PansiChar(TempDir+ 'order.xls'));
-  DMMain.ta_printorder( DMMain.OrdersSumQ.FieldByName('ORDERID').AsInteger);
+  DMMain.ta_extractres(PChar('tareport.dll'), PChar('XLS_ORDER'), PChar(TempDir+ 'order.xls'));
+  DMMain.ta_printorder(DMMain.OrdersSumQ.FieldByName('ORDERID').AsInteger,FMain.XLApp);
 end;
 
 procedure TFOrders.cbStatusChange(Sender: TObject);
@@ -173,11 +173,12 @@ begin
   DMMain.OrdersSumQ.ParamByName('SDATE').AsDate:=deSDate.Date;
   DMMain.OrdersSumQ.ParamByName('EDATE').AsDate:=deEDate.Date;
   DMMain.OrdersSumQ.Active:=True;
+  DMMain.PositionsSumQ.Active:=False;
   DMMain.PositionsSumQ.Active:=True;
   case cbStatus.ItemIndex of
   0: DMMain.OrdersSumQ.Filtered:=false;
   1..3: begin
-          DMMain.OrdersSumQ.Filter:='O.STATUS = ' + IntToStr(cbStatus.ItemIndex-1);
+          DMMain.OrdersSumQ.Filter:='O.STATUS = ' + AnsiString(IntToStr(cbStatus.ItemIndex-1));
           DMMain.OrdersSumQ.Filtered:=true;
         end;
 

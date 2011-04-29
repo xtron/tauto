@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, LMDPNGImage, ExtCtrls;
+  Dialogs, StdCtrls, ExtCtrls;
 
 type
   TFABout = class(TForm)

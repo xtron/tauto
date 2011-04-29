@@ -54,7 +54,7 @@ begin
   //Иначе проверяем пользователя
   DMMain.TempQ.SQL.Text:='SELECT * FROM TA_USERS WHERE ISACTIVE=1 AND USERID=:UID AND USERPASS = :PASS';
   DMMain.TempQ.ParamByName('UID').AsInteger:=Integer(cbUser.Items.Objects[cbUser.ItemIndex]);
-  DMMain.TempQ.ParamByName('PASS').AsString:=ePasswd.Text;
+  DMMain.TempQ.ParamByName('PASS').AsString:=AnsiString(ePasswd.Text);
   DMMain.TempQ.Open;
   Tag:=Integer(cbUser.Items.Objects[cbUser.ItemIndex]);
   //Если аутентификация прошла, выходим по ОК, иначе выводим диалог о неверном пароле и на повтор

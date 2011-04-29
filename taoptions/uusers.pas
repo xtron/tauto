@@ -66,8 +66,8 @@ begin
  if FAddUser.ShowModal=mrOk then
  begin
     DMMain.UsersQ.Insert;
-    DMMain.UsersQ.FieldByName('USERNAME').AsString:=FAddUser.EUserName.Text;
-    DMMain.UsersQ.FieldByName('USERPASS').AsString:=FAddUser.EPasswd.Text;
+    DMMain.UsersQ.FieldByName('USERNAME').AsString:=AnsiString(FAddUser.EUserName.Text);
+    DMMain.UsersQ.FieldByName('USERPASS').AsString:=AnsiString(FAddUser.EPasswd.Text);
     DMMain.UsersQ.FieldByName('GROUPID').AsInteger:=FAddUser.cbUserGroup.ItemIndex+1;
     DMMain.UsersQ.FieldByName('ISACTIVE').AsInteger:=Integer(FAddUser.cbActive.Checked);
     DMMain.UsersQ.Post;
@@ -111,8 +111,8 @@ begin
  Guest:=0;
  FAddUser:=TFAddUser.Create(self);
  FAddUser.Caption:='Изменение пользователя';
- FAddUser.EUserName.Text:=DMMain.UsersQ.FieldByName('USERNAME').AsString;
- FAddUser.EPasswd.Text:=DMMain.UsersQ.FieldByName('USERPASS').AsString;
+ FAddUser.EUserName.Text:=string(DMMain.UsersQ.FieldByName('USERNAME').AsString);
+ FAddUser.EPasswd.Text:=string(DMMain.UsersQ.FieldByName('USERPASS').AsString);
  IDX:=DMMain.UsersQ.FieldByName('USERID').AsInteger;
  if DMMain.UsersQ.FieldByName('GROUPID').AsInteger=0 then
  begin
@@ -128,8 +128,8 @@ begin
  if FAddUser.ShowModal=mrOk then
  begin
     DMMain.UsersQ.Edit;
-    DMMain.UsersQ.FieldByName('USERNAME').AsString:=FAddUser.EUserName.Text;
-    DMMain.UsersQ.FieldByName('USERPASS').AsString:=FAddUser.EPasswd.Text;
+    DMMain.UsersQ.FieldByName('USERNAME').AsString:=AnsiString(FAddUser.EUserName.Text);
+    DMMain.UsersQ.FieldByName('USERPASS').AsString:=AnsiString(FAddUser.EPasswd.Text);
     DMMain.UsersQ.FieldByName('GROUPID').AsInteger:=FAddUser.cbUserGroup.ItemIndex+1-Guest;
     DMMain.UsersQ.FieldByName('ISACTIVE').AsInteger:=Integer(FAddUser.cbActive.Checked);
     DMMain.UsersQ.Post;

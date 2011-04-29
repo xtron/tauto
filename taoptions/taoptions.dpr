@@ -26,7 +26,7 @@ begin
   DMMain.TempQ.Close;
   DMMain.TempQ.SQL.Text:='SELECT * FROM OPTIONS WHERE OPTIONSID=2';
   DMMain.TempQ.Open;
-  FMain.MInfo.Text:=DMMain.TempQ.FieldByName('OPTIONS').AsString;
+  FMain.MInfo.Text:=string(DMMain.TempQ.FieldByName('OPTIONS').AsString);
   DMMain.TempQ.Close;
   if FMain.ShowModal = mrOk then
   begin
@@ -35,7 +35,7 @@ begin
     DMMain.TempQ.ParamByName('O').AsInteger:=Integer(FMain.cbShowExcel.Checked);
     DMMain.TempQ.ExecSQL;
     DMMain.TempQ.ParamByName('OID').AsInteger:=2;
-    DMMain.TempQ.ParamByName('O').AsString:=FMain.MInfo.Text;
+    DMMain.TempQ.ParamByName('O').AsString:=AnsiString(FMain.MInfo.Text);
     DMMain.TempQ.ExecSQL;
     DMMain.TempQ.Close;
     DMMain.IBT.CommitRetaining;
@@ -77,7 +77,7 @@ begin
     DMMain.TempQ.SQL.Add('WHERE R.GROUPID = :GID AND R.ENABLED=1');
     DMMain.TempQ.Prepare;
     DMMain.TempQ.ParamByName('GID').AsInteger:=GID;
-    DMMain.TempQ.ParamByName('MODNAME').AsString:=MODULE;
+    DMMain.TempQ.ParamByName('MODNAME').AsString:=AnsiString(MODULE);
     DMMain.TempQ.Open;
     AForm := TForm(FForm);
     with AForm do

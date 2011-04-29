@@ -5,8 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, PngBitBtn, ExtCtrls, UdcPanel, ActnList, ImgList,
-  PngImageList, LMDControl, LMDCustomControl, LMDCustomPanel, LMDButtonControl,
-  LMDCustomCheckBox, LMDCheckBox, UdcCheckBox, UdcComboBox, UdcEdit;
+  PngImageList, UdcCheckBox, UdcComboBox, UdcEdit;
 
 type
   TFAddUser = class(TForm)

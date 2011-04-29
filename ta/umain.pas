@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ActnList, ImgList, PngImageList, ActnCtrls, ToolWin, ActnMan,
-  ActnMenus, XPStyleActnCtrls, XPMan;
+  ActnMenus, XPStyleActnCtrls, XPMan,ExcelXP,OleServer;
 
 type
   TFMain = class(TForm)
@@ -36,9 +36,9 @@ type
     procedure FormResize(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
-    { Private declarations }
+
   public
-    { Public declarations }
+        XLApp:TExcelApplication;
   end;
 procedure LoadTAModule(aUID,aGID,dbHandle:Integer; var Result:Integer; dllName, ProcName: PChar);
 
@@ -128,6 +128,10 @@ procedure TFMain.FormCreate(Sender: TObject);
 begin
 
  DMMain.LoadGrants('TA',integer(self),GID);
+ XLApp:=TExcelApplication.Create(self);
+ XLApp.ConnectKind:=ckRunningOrNew;
+ XLApp.AutoConnect:=True;
+ XLApp.AutoQuit:=True;
 end;
 
 procedure TFMain.FormResize(Sender: TObject);

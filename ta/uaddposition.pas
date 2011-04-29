@@ -5,8 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ActnList, ImgList, PngImageList, StdCtrls, Buttons, PngBitBtn,
-  ExtCtrls, UdcPanel, UdcComboBox, UdcEdit, Mask, ToolEdit, CurrEdit,
-  UdcCalcEdit;
+  ExtCtrls, UdcPanel, UdcComboBox, UdcEdit, Mask,
+  UdcCalcEdit, rxToolEdit, rxCurrEdit;
 
 type
   TFAddPosition = class(TForm)
@@ -71,7 +71,7 @@ end;
 
 procedure TFAddPosition.EPosCountKeyPress(Sender: TObject; var Key: Char);
 begin
- if key in ['.',','] then key:=#0;
+ if CharInSet(Key,['.',',']) then key:=#0;
 
 end;
 

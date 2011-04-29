@@ -127,7 +127,6 @@ object FAddOrders: TFAddOrders
       Height = 21
       AutoCompleteDelay = 1500
       Style = csDropDownList
-      ItemHeight = 13
       MaxLength = 50
       TabOrder = 0
     end
@@ -189,7 +188,6 @@ object FAddOrders: TFAddOrders
       Width = 67
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
       ItemIndex = 0
       TabOrder = 5
       Text = #1040#1050#1055#1055
@@ -204,7 +202,6 @@ object FAddOrders: TFAddOrders
       Width = 151
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
       ItemIndex = 0
       TabOrder = 6
       Text = #1055#1045#1056#1045#1044#1053#1048#1049
@@ -264,6 +261,8 @@ object FAddOrders: TFAddOrders
         Height = 25
         Action = aAddPos
         Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+        DoubleBuffered = True
+        ParentDoubleBuffered = False
         TabOrder = 0
       end
       object bEditPos: TPngBitBtn
@@ -273,6 +272,8 @@ object FAddOrders: TFAddOrders
         Height = 25
         Action = aEditPos
         Caption = #1048#1079#1084#1077#1085#1080#1090#1100
+        DoubleBuffered = True
+        ParentDoubleBuffered = False
         TabOrder = 1
       end
       object bDelPos: TPngBitBtn
@@ -282,6 +283,8 @@ object FAddOrders: TFAddOrders
         Height = 25
         Action = aDelPos
         Caption = #1059#1076#1072#1083#1080#1090#1100
+        DoubleBuffered = True
+        ParentDoubleBuffered = False
         TabOrder = 2
       end
     end
@@ -386,8 +389,8 @@ object FAddOrders: TFAddOrders
       Width = 97
       Height = 17
       Caption = #1047#1072#1082#1072#1079' '#1086#1090#1084#1077#1085#1077#1085
-      Alignment.Alignment = agTopLeft
-      Alignment.Spacing = 4
+      Color = clBtnFace
+      ParentColor = False
       TabOrder = 2
       OnClick = gbOrderInfoClick
     end
@@ -413,6 +416,8 @@ object FAddOrders: TFAddOrders
       Height = 25
       Action = aCancel
       Caption = #1054#1090#1084#1077#1085#1072
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 7
     end
     object bSave: TPngBitBtn
@@ -422,6 +427,8 @@ object FAddOrders: TFAddOrders
       Height = 25
       Action = aSave
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 5
     end
     object bHistory: TPngBitBtn
@@ -431,6 +438,8 @@ object FAddOrders: TFAddOrders
       Height = 25
       Action = aHistory
       Caption = #1048#1089#1090#1086#1088#1080#1103
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 6
     end
   end
@@ -448,6 +457,8 @@ object FAddOrders: TFAddOrders
   object PngImageList: TPngImageList
     PngImages = <
       item
+        Background = clWindow
+        Name = 'PngImage0'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           610000022C4944415478DA8D93CF6B134114C7DFECECCF48450CB5D254458954
@@ -469,10 +480,10 @@ object FAddOrders: TFAddOrders
           BA74E781ECBEDB5A414E639E2703F4E4F1D4C085AE521C6A3C56DF6FCCACD558
           B2660ADB399D558ABBEFB6BFF1B6EDFC176E40E92E76BAF6550000000049454E
           44AE426082}
-        Name = 'PngImage0'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage1'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000001F74944415478DAA592DF8B616118C79F718529931F372E14DA0BA5B6
@@ -492,10 +503,10 @@ object FAddOrders: TFAddOrders
           66A4021C8CABC1BBC76B44CF18E4723939E8C53E4722912F17009FCF4759AD56
           4628149E878885DC17FBD17D8B56FA3B93C97CCB66B38F1780FFB117B2203D20
           0B2CAB330000000049454E44AE426082}
-        Name = 'PngImage1'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage2'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000000097048597300000B1300000B1301009A9C1800000A4D694343505068
@@ -590,10 +601,10 @@ object FAddOrders: TFAddOrders
           03FE017DC0C5C1F0E4D78F638C4D9C0C916C0C0CFE2C0C0CECFF2186130E0220
           FAC3C0F0F31703C346464545456090328801313B03910640CC60F809C4AF0641
           4A1C7003001A315D2C8A265B510000000049454E44AE426082}
-        Name = 'PngImage2'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage8'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002524944415478DA95934D48625114C78FF999961FB49016CECE858BE0
@@ -616,10 +627,10 @@ object FAddOrders: TFAddOrders
           E0FE1E8E4E4F718FD085428105180C86AA5028D4E2FB3EEB83B7D4EFF721954A
           C1CBCB0BBAB8B8784F00FFD3CE333D3F3F7F67CA403F0160C50A20A9EE050D00
           00000049454E44AE426082}
-        Name = 'PngImage8'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage4'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002604944415478DAA5914F68D36018C6DF2F694C62D535B09E320FAB5D
@@ -642,10 +653,10 @@ object FAddOrders: TFAddOrders
           AC81B9465506C33C23BB3D7BC4D4DA97CC64325BA98AB41370B2527DA347F8B1
           B2ACDC4CABD519D821E79DDCAD27D9FCB8BDAA2DCD7F6E3B1BBA9F2B8C90DD6B
           D6F82FE717F6720120E939C7B90000000049454E44AE426082}
-        Name = 'PngImage4'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage5'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           610000030B4944415478DA75535B485451145D771E3E6794B9634E8EAF9CD47C
@@ -674,8 +685,6 @@ object FAddOrders: TFAddOrders
           1AC4657B398BFDC916415D5DDD239FCF276869A72C2F9680C1F7472714A48424
           045399A68EBC4CCDFEBE51D372C7F507436FADF90A0E61350000000049454E44
           AE426082}
-        Name = 'PngImage5'
-        Background = clWindow
       end>
     Left = 392
     Top = 216

@@ -52,7 +52,6 @@ object FAddUser: TFAddUser
     Height = 21
     Style = csDropDownList
     CharCase = ecUpperCase
-    ItemHeight = 13
     ItemIndex = 0
     TabOrder = 1
     Text = #1055#1054#1051#1068#1047#1054#1042#1040#1058#1045#1051#1068
@@ -75,8 +74,8 @@ object FAddUser: TFAddUser
     Width = 203
     Height = 17
     Caption = #1040#1082#1090#1080#1074#1077#1085
-    Alignment.Alignment = agTopLeft
-    Alignment.Spacing = 4
+    Color = clBtnFace
+    ParentColor = False
     TabOrder = 3
   end
   object PControl: TUdcPanel
@@ -98,6 +97,8 @@ object FAddUser: TFAddUser
       Action = aOK
       Anchors = [akTop, akRight]
       Caption = #1054#1050
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 0
     end
     object bCancel: TPngBitBtn
@@ -108,12 +109,16 @@ object FAddUser: TFAddUser
       Action = aCancel
       Anchors = [akTop, akRight]
       Caption = #1054#1090#1084#1077#1085#1072
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 1
     end
   end
   object PngImageList: TPngImageList
     PngImages = <
       item
+        Background = clWindow
+        Name = 'PngImage4'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002604944415478DAA5914F68D36018C6DF2F694C62D535B09E320FAB5D
@@ -136,10 +141,10 @@ object FAddUser: TFAddUser
           AC81B9465506C33C23BB3D7BC4D4DA97CC64325BA98AB41370B2527DA347F8B1
           B2ACDC4CABD519D821E79DDCAD27D9FCB8BDAA2DCD7F6E3B1BBA9F2B8C90DD6B
           D6F82FE717F6720120E939C7B90000000049454E44AE426082}
-        Name = 'PngImage4'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage5'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002114944415478DA6364A0103092AA81898581E9DF1F867F6419C021C0
@@ -160,8 +165,6 @@ object FAddUser: TFAddUser
           8CA2B80FC82A4829FDF9FB87E1E6B927EBAEADFF8D5533CEA40C32C43A4E72DF
           87D7DF2E9E5FFD31129766BC79013DD3906C00B100001BF5F2C3BD831BBB0000
           000049454E44AE426082}
-        Name = 'PngImage5'
-        Background = clWindow
       end>
     Left = 9
     Top = 34

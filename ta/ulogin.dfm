@@ -44,7 +44,6 @@ object FLogin: TFLogin
     Width = 186
     Height = 21
     Style = csDropDownList
-    ItemHeight = 13
     ItemIndex = 0
     TabOrder = 0
     Text = #1043#1054#1057#1058#1068
@@ -59,7 +58,8 @@ object FLogin: TFLogin
     Height = 25
     Action = aLogin
     Caption = #1042#1093#1086#1076
-    Default = True
+    DoubleBuffered = True
+    ParentDoubleBuffered = False
     TabOrder = 2
   end
   object bCancel: TPngBitBtn
@@ -68,13 +68,16 @@ object FLogin: TFLogin
     Width = 75
     Height = 25
     Action = aCancel
-    Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
+    DoubleBuffered = True
+    ParentDoubleBuffered = False
     TabOrder = 3
   end
   object PngImageList: TPngImageList
     PngImages = <
       item
+        Background = clWindow
+        Name = 'PngImage0'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002114944415478DA6364A0103092AA81898581E9DF1F867F6419C021C0
@@ -95,10 +98,10 @@ object FLogin: TFLogin
           8CA2B80FC82A4829FDF9FB87E1E6B927EBAEADFF8D5533CEA40C32C43A4E72DF
           87D7DF2E9E5FFD31129766BC79013DD3906C00B100001BF5F2C3BD831BBB0000
           000049454E44AE426082}
-        Name = 'PngImage0'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage1'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002604944415478DAA5914F68D36018C6DF2F694C62D535B09E320FAB5D
@@ -121,8 +124,6 @@ object FLogin: TFLogin
           AC81B9465506C33C23BB3D7BC4D4DA97CC64325BA98AB41370B2527DA347F8B1
           B2ACDC4CABD519D821E79DDCAD27D9FCB8BDAA2DCD7F6E3B1BBA9F2B8C90DD6B
           D6F82FE717F6720120E939C7B90000000049454E44AE426082}
-        Name = 'PngImage1'
-        Background = clWindow
       end>
     Left = 8
     Top = 56

@@ -200,6 +200,8 @@ object FMain: TFMain
       Height = 25
       Action = aFind
       Caption = #1053#1072#1081#1090#1080
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 0
     end
     object bClear: TPngBitBtn
@@ -209,6 +211,8 @@ object FMain: TFMain
       Height = 25
       Action = aClear
       Caption = #1054#1095#1080#1089#1090#1080#1090#1100
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 1
     end
     object bExit: TPngBitBtn
@@ -218,6 +222,8 @@ object FMain: TFMain
       Height = 25
       Action = aExit
       Caption = #1042#1099#1093#1086#1076
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 2
     end
   end
@@ -249,6 +255,8 @@ object FMain: TFMain
   object PngImageList: TPngImageList
     PngImages = <
       item
+        Background = clWindow
+        Name = 'PngImage0'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000000097048597300000B1300000B1301009A9C1800000A4F694343505068
@@ -363,10 +371,10 @@ object FMain: TFMain
           E1C2DB690FD881E97B425375F05AACC18E5D78FFF0FF8F8ABD2D5D8548E6A13E
           3CEBF91EF0C22BF6C237120502F0DD2AF224B26D4B4E3F01DC94E5097467EE2E
           0000000049454E44AE426082}
-        Name = 'PngImage0'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage1'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002D64944415478DA95535D489361143EDB5C73FBF6FFBF39F7D36CB672
@@ -393,10 +401,10 @@ object FMain: TFMain
           827DC43BB3CCC880D198011EE545D77D53BE6BFFBC4CA80D7387B67A404A10CA
           28933731EEF77622F797FFD946525B965028CFADAF2FFC6D9DBF03ADEC02C059
           9023950000000049454E44AE426082}
-        Name = 'PngImage1'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage2'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000000097048597300000B1300000B1301009A9C1800000A4D694343505068
@@ -491,8 +499,6 @@ object FMain: TFMain
           03FE017DC0C5C1F0E4D78F638C4D9C0C916C0C0CFE2C0C0CECFF2186130E0220
           FAC3C0F0F31703C346464545456090328801313B03910640CC60F809C4AF0641
           4A1C7003001A315D2C8A265B510000000049454E44AE426082}
-        Name = 'PngImage2'
-        Background = clWindow
       end>
     Left = 48
     Top = 128

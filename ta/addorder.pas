@@ -5,10 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, UdcEdit, UdcComboBox, ExtCtrls, UdcPanel, Buttons,
-  PngBitBtn, ToolEdit, UdcDateEdit, Mask, CurrEdit, Grids, IB_Grid, UdcIB_Grid,
-  ActnList, ImgList, PngImageList,DateUtils,IB_Components, UdcCalcEdit,
-  LMDControl, LMDCustomControl, LMDCustomPanel, LMDButtonControl,
-  LMDCustomCheckBox, LMDCheckBox, UdcCheckBox;
+  PngBitBtn, UdcDateEdit, Mask, Grids, IB_Grid, UdcIB_Grid,
+  ActnList, ImgList, PngImageList,DateUtils,IB_Components, UdcCalcEdit, UdcCheckBox, rxCurrEdit, rxToolEdit;
 
 type
   TFAddOrders = class(TForm)
@@ -109,11 +107,11 @@ begin
   begin
     DMMain.PositionsQ.Insert;
     DMMain.PositionsQ.FieldByName('ORDERID').AsInteger:=DMMain.OrdersQ.FieldByName('ORDERID').AsInteger;
-    DMMain.PositionsQ.FieldByName('POSITIONNAME').AsString:=FAddPosition.EPositionName.Text;
-    DMMain.PositionsQ.FieldByName('POSITIONNO').AsString:=FAddPosition.EPositionNO.Text;
+    DMMain.PositionsQ.FieldByName('POSITIONNAME').AsString:=AnsiString(FAddPosition.EPositionName.Text);
+    DMMain.PositionsQ.FieldByName('POSITIONNO').AsString:=AnsiString(FAddPosition.EPositionNO.Text);
     DMMain.PositionsQ.FieldByName('POSTID').AsInteger:=Integer(FAddPosition.cbPostID.Items.Objects[FAddPosition.cbPostID.ItemIndex]);
-    DMMain.PositionsQ.FieldByName('POSCOUNT').AsString:=FAddPosition.EPosCount.Text;
-    DMMain.PositionsQ.FieldByName('NOTE').AsString:=FAddPosition.ENote.Text;
+    DMMain.PositionsQ.FieldByName('POSCOUNT').AsString:=AnsiString(FAddPosition.EPosCount.Text);
+    DMMain.PositionsQ.FieldByName('NOTE').AsString:=AnsiString(FAddPosition.ENote.Text);
     DMMain.PositionsQ.FieldByName('USERID').AsInteger:=UID;
     DMMain.PositionsQ.FieldByName('STATUS').AsInteger:=FAddPosition.cbStatus.ItemIndex;
     DMMain.PositionsQ.FieldByName('COST').AsFloat:=FAddPosition.cCost.Value;
@@ -149,10 +147,10 @@ begin
   idx:=FAddPosition.cbPostID.Items.IndexOfObject(Tobject(DMMain.PositionsQ.FieldByName('POSTID').AsInteger));
   if idx<0 then idx:=0;
   FAddPosition.cbPostID.ItemIndex:=idx;
-  FAddPosition.EPositionName.Text:=DMMain.PositionsQ.FieldByName('POSITIONNAME').AsString;
-  FAddPosition.EPositionNO.Text:=DMMain.PositionsQ.FieldByName('POSITIONNO').AsString;
-  FAddPosition.EPosCount.Text:=DMMain.PositionsQ.FieldByName('POSCOUNT').AsString;
-  FAddPosition.ENote.Text:=DMMain.PositionsQ.FieldByName('NOTE').AsString;
+  FAddPosition.EPositionName.Text:=string(DMMain.PositionsQ.FieldByName('POSITIONNAME').AsString);
+  FAddPosition.EPositionNO.Text:=string(DMMain.PositionsQ.FieldByName('POSITIONNO').AsString);
+  FAddPosition.EPosCount.Text:=string(DMMain.PositionsQ.FieldByName('POSCOUNT').AsString);
+  FAddPosition.ENote.Text:=string(DMMain.PositionsQ.FieldByName('NOTE').AsString);
   FAddPosition.cbStatus.ItemIndex:=DMMain.PositionsQ.FieldByName('STATUS').AsInteger;
   FAddPosition.cCost.Value:=DMMain.PositionsQ.FieldByName('COST').AsFloat;
   FAddPosition.pUserFIO.Caption:='Редактировалось: '+ DMMain.GetUserFIO(DMMain.PositionsQ.FieldByName('USERID').AsInteger);
@@ -160,11 +158,11 @@ begin
   begin
     DMMain.PositionsQ.Edit;
     DMMain.PositionsQ.FieldByName('ORDERID').AsInteger:=DMMain.OrdersQ.FieldByName('ORDERID').AsInteger;
-    DMMain.PositionsQ.FieldByName('POSITIONNAME').AsString:=FAddPosition.EPositionName.Text;
-    DMMain.PositionsQ.FieldByName('POSITIONNO').AsString:=FAddPosition.EPositionNO.Text;
+    DMMain.PositionsQ.FieldByName('POSITIONNAME').AsString:=AnsiString(FAddPosition.EPositionName.Text);
+    DMMain.PositionsQ.FieldByName('POSITIONNO').AsString:=AnsiString(FAddPosition.EPositionNO.Text);
     DMMain.PositionsQ.FieldByName('POSTID').AsInteger:=Integer(FAddPosition.cbPostID.Items.Objects[FAddPosition.cbPostID.ItemIndex]);
-    DMMain.PositionsQ.FieldByName('POSCOUNT').AsString:=FAddPosition.EPosCount.Text;
-    DMMain.PositionsQ.FieldByName('NOTE').AsString:=FAddPosition.ENote.Text;
+    DMMain.PositionsQ.FieldByName('POSCOUNT').AsString:=AnsiString(FAddPosition.EPosCount.Text);
+    DMMain.PositionsQ.FieldByName('NOTE').AsString:=AnsiString(FAddPosition.ENote.Text);
     DMMain.PositionsQ.FieldByName('USERID').AsInteger:=UID;
     DMMain.PositionsQ.FieldByName('STATUS').AsInteger:=FAddPosition.cbStatus.ItemIndex;
     DMMain.PositionsQ.FieldByName('COST').AsFloat:=FAddPosition.cCost.Value;
@@ -223,7 +221,7 @@ begin
   DMMain.TempQ.SQL.Text:='SELECT SUM(P.COST*P.POSCOUNT) ORDERSUM FROM POSITIONS P WHERE P.ORDERID = :OID';
   DMMain.TempQ.ParamByName('OID').AsInteger:=DMMain.OrdersQ.FieldByName('ORDERID').AsInteger;
   DMMain.TempQ.Open;
-  pOrderSum.Caption:=DMMain.TempQ.FieldByName('ORDERSUM').AsString;
+  pOrderSum.Caption:=string(DMMain.TempQ.FieldByName('ORDERSUM').AsString);
   pClientDolg.Caption:=FloatToStr(StrToFloat(pOrderSum.Caption)-cAvance.Value);
   DMMain.TempQ.Close;
 end;

@@ -4,8 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, LMDControl, LMDCustomControl, LMDCustomPanel,
-  LMDButtonControl, LMDCustomCheckBox, LMDCheckBox, UdcCheckBox, Buttons,
+  Dialogs, StdCtrls,UdcCheckBox, Buttons,
   PngBitBtn, ExtCtrls, UdcPanel, ImgList, PngImageList, ActnList;
 
 type

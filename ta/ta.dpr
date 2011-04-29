@@ -41,7 +41,7 @@ begin
   DMMain:=TDMMain.Create(Application);
   DMMain.IBC.Username:='TAUTO';
   DMMain.IBC.Password:='troya_auto';
-  DMMain.IBC.DatabaseName:=dbpath;
+  DMMain.IBC.DatabaseName:=AnsiString(dbpath);
   //ѕытаемс€ законнектитс€
   try
    DMMain.IBC.Connect;
@@ -53,7 +53,7 @@ begin
    //—троим список доступных пользователей в форме логина
    while not DMMain.TempQ.Eof do
    begin
-    FLogin.cbUser.AddItem(DMMain.TempQ.FieldByName('USERNAME').AsString,TObject(DMMain.TempQ.FieldByName('USERID').AsInteger));
+    FLogin.cbUser.AddItem(string(DMMain.TempQ.FieldByName('USERNAME').AsString),TObject(DMMain.TempQ.FieldByName('USERID').AsInteger));
     DMMain.TempQ.Next;
    end;
    DMMain.TempQ.Close;
@@ -82,7 +82,7 @@ begin
    DMMain.TempQ.Open;
    while not DMMain.TempQ.Eof do
    begin
-     DMMain.FNameList.AddObject(DMMain.TempQ.FieldByName('FNAME').AsString,
+     DMMain.FNameList.AddObject(string(DMMain.TempQ.FieldByName('FNAME').AsString),
                                 TObject(DMMain.TempQ.FieldByName('FNAMEID').AsInteger)
 
      );
@@ -94,7 +94,7 @@ begin
    DMMain.TempQ.Open;
    while not DMMain.TempQ.Eof do
    begin
-     DMMain.CarMarksList.AddObject(DMMain.TempQ.FieldByName('CARMARKS').AsString,
+     DMMain.CarMarksList.AddObject(string(DMMain.TempQ.FieldByName('CARMARKS').AsString),
                                 TObject(DMMain.TempQ.FieldByName('CARMARKSID').AsInteger)
 
      );
@@ -106,7 +106,7 @@ begin
    DMMain.TempQ.Open;
    while not DMMain.TempQ.Eof do
    begin
-     DMMain.PostList.AddObject(DMMain.TempQ.FieldByName('POST').AsString,
+     DMMain.PostList.AddObject(string(DMMain.TempQ.FieldByName('POST').AsString),
                                 TObject(DMMain.TempQ.FieldByName('POSTID').AsInteger)
 
      );

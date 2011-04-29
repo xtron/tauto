@@ -2,7 +2,7 @@ object FOrders: TFOrders
   Left = 0
   Top = 0
   Caption = #1047#1072#1082#1072#1079#1099
-  ClientHeight = 526
+  ClientHeight = 530
   ClientWidth = 792
   Color = clBtnFace
   Constraints.MinHeight = 560
@@ -19,7 +19,7 @@ object FOrders: TFOrders
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 311
+    Top = 315
     Width = 792
     Height = 3
     Cursor = crVSplit
@@ -29,7 +29,7 @@ object FOrders: TFOrders
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 507
+    Top = 511
     Width = 792
     Height = 19
     Panels = <>
@@ -83,6 +83,8 @@ object FOrders: TFOrders
       Height = 25
       Action = aCurrentDay
       Caption = #1053#1072' '#1089#1077#1075#1086#1076#1085#1103
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 3
     end
     object bInfo: TPngBitBtn
@@ -92,6 +94,8 @@ object FOrders: TFOrders
       Height = 25
       Action = aInfo
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 4
     end
     object bPrint: TPngBitBtn
@@ -101,6 +105,8 @@ object FOrders: TFOrders
       Height = 25
       Action = aPrint
       Caption = #1055#1077#1095#1072#1090#1100
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 5
     end
     object bClose: TPngBitBtn
@@ -110,6 +116,8 @@ object FOrders: TFOrders
       Height = 25
       Action = aClose
       Caption = #1047#1072#1082#1088#1099#1090#1100
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 6
     end
     object cbStatus: TUdcComboBox
@@ -118,7 +126,6 @@ object FOrders: TFOrders
       Width = 101
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
       TabOrder = 2
       OnChange = cbStatusChange
       Items.Strings = (
@@ -132,7 +139,7 @@ object FOrders: TFOrders
     Left = 0
     Top = 31
     Width = 792
-    Height = 280
+    Height = 284
     CustomGlyphsSupplied = []
     DataSource = DMMain.OrdersSumDS
     Align = alClient
@@ -145,7 +152,7 @@ object FOrders: TFOrders
   end
   object UdcIB_Grid1: TUdcIB_Grid
     Left = 0
-    Top = 314
+    Top = 318
     Width = 792
     Height = 193
     CustomGlyphsSupplied = []
@@ -205,6 +212,8 @@ object FOrders: TFOrders
   object PngImageList: TPngImageList
     PngImages = <
       item
+        Background = clWindow
+        Name = 'PngImage0'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000000097048597300000B1300000B1301009A9C1800000A4F694343505068
@@ -319,10 +328,10 @@ object FOrders: TFOrders
           E1C2DB690FD881E97B425375F05AACC18E5D78FFF0FF8F8ABD2D5D8548E6A13E
           3CEBF91EF0C22BF6C237120502F0DD2AF224B26D4B4E3F01DC94E5097467EE2E
           0000000049454E44AE426082}
-        Name = 'PngImage0'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage1'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002EA4944415478DA85535D489A61147E3EC57ED49695191999D12A6354
@@ -350,10 +359,10 @@ object FOrders: TFOrders
           2C2E2EBE47E7EB6030B84FA789B2BEFFEB369289A85C5D341A0DAFAEAEBE6597
           89BDA496AAC3E1F03E7D067FDF959F0077214951D285220000000049454E44AE
           426082}
-        Name = 'PngImage1'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage2'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000003224944415478DA6D937B48145114C6BF999DD19971574D5D49CB2834
@@ -382,10 +391,10 @@ object FOrders: TFOrders
           AB3D944FF1DDA32F131DB11431332321397B7D6CDC9C1966B339400BF8DED3DD
           6B6B6D6E6BBE7EA9D2F1F159354DB9FF7F1B871F91DE28F80687EA7F43F62EFA
           BED390FF0DFC0121543536A8774CD90000000049454E44AE426082}
-        Name = 'PngImage2'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage3'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002AE4944415478DA75936D48535118C7FF77BB37973315C50F4E825021
@@ -411,8 +420,6 @@ object FOrders: TFOrders
           A175003FA834900AA01841FC3C54F84F2F03D3A429D2247F90442F05ABC1AF51
           C43B267182C4C2FA2A5F47411E3EF7F5037F00F448F81368207F830000000049
           454E44AE426082}
-        Name = 'PngImage3'
-        Background = clWindow
       end>
     Left = 752
     Top = 328

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, IB_Grid, UdcIB_Grid, StdCtrls, LMDCustomButton, LMDButton,
+  Dialogs, Grids, IB_Grid, UdcIB_Grid, StdCtrls,
   UdcButton, ActnList, UdcComboBox, ExtCtrls, UdcPanel, ComCtrls, ToolWin,
   ImgList, PngImageList,IB_Components;
 
@@ -66,7 +66,7 @@ procedure TFMain.aAddExecute(Sender: TObject);
 begin
   FDictInfo:=TFDictInfo.Create(self);
   FDictInfo.Tag:=mfInsert;
-  FDictInfo.lblValue.Caption:=Trim(DMMain.FieldNameQ.FieldByName('FIELDNAME').AsString);
+  FDictInfo.lblValue.Caption:=Trim(string(DMMain.FieldNameQ.FieldByName('FIELDNAME').AsString));
   FDictInfo.ShowModal;
 end;
 
@@ -78,7 +78,8 @@ begin
     begin
       DMMain.DictTempQ.Close;
       DMMain.DictTempQ.SQL.Text:='DELETE FROM '+string(cbDictName.Items.Objects[cbDictName.ItemIndex])+' WHERE '+
-                                 string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'ID='+DMMain.DataFromDictQ.FieldByName(string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'ID').AsString;
+                                 string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'ID='+
+                                 string(DMMain.DataFromDictQ.FieldByName(AnsiString(string(cbDictName.Items.Objects[cbDictName.ItemIndex]))+'ID').AsString);
       DMMain.DictTempQ.Execute;
       DMMain.IBT.CommitRetaining;
       DMMain.DataFromDictQ.Refresh;
@@ -96,7 +97,7 @@ begin
    begin
     FDictInfo:=TFDictInfo.Create(self);
     FDictInfo.Tag:=mfEdit;
-    FDictInfo.lblValue.Caption:=Trim(DMMain.FieldNameQ.FieldByName('FIELDNAME').AsString);
+    FDictInfo.lblValue.Caption:=Trim(string(DMMain.FieldNameQ.FieldByName('FIELDNAME').AsString));
     fld:=nil;
     DMMain.DataFromDictQ.Fields.GetByName('ISACTIVE',fld);
     if Assigned(fld) then
@@ -118,10 +119,10 @@ procedure TFMain.aSelectExecute(Sender: TObject);
 begin
  if not DMMain.DataFromDictQ.IsEmpty then
    begin
-       if SS.IndexOf(IntToStr(cbDictName.ItemIndex)+':'+DMMain.DataFromDictQ.FieldByName(string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'ID').AsString)>=0 then
-       SS.Delete(SS.IndexOf(IntToStr(cbDictName.ItemIndex)+':'+DMMain.DataFromDictQ.FieldByName(string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'ID').AsString))
+       if SS.IndexOf(IntToStr(cbDictName.ItemIndex)+':'+string(DMMain.DataFromDictQ.FieldByName(AnsiString(string(cbDictName.Items.Objects[cbDictName.ItemIndex]))+'ID').AsString))>=0 then
+       SS.Delete(SS.IndexOf(IntToStr(cbDictName.ItemIndex)+':'+string(DMMain.DataFromDictQ.FieldByName(AnsiString(string(cbDictName.Items.Objects[cbDictName.ItemIndex]))+'ID').AsString)))
        else
-       SS.Add(IntToStr(cbDictName.ItemIndex)+':'+DMMain.DataFromDictQ.FieldByName(string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'ID').AsString);
+       SS.Add(IntToStr(cbDictName.ItemIndex)+':'+string(DMMain.DataFromDictQ.FieldByName(AnsiString(string(cbDictName.Items.Objects[cbDictName.ItemIndex]))+'ID').AsString));
        aUnion.Enabled:=False;
        gridDict.Repaint
       end;
@@ -133,7 +134,7 @@ Var I,ID: Integer;
 begin
  if DMMain.DataFromDictQ.IsEmpty then  Exit;
 try
- ID:=DMMain.DataFromDictQ.FieldByName(string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'ID').AsInteger;
+ ID:=DMMain.DataFromDictQ.FieldByName(AnsiString(string(cbDictName.Items.Objects[cbDictName.ItemIndex]))+'ID').AsInteger;
  //In-Часть запроса на обновление
  SqlStr:=' IN(';
  for I := 0 to SS.Count - 1 do
@@ -145,14 +146,20 @@ try
  //Получаем список зависимых таблиц с полями
  DMMain.DictTempQ.Close;
  DMMain.DictTempQ.SQL.Text:='SELECT DTABLE,DFIELD FROM RPT$GET_DTABLES(:TNAME)';
- DMMain.DictTempQ.ParamByName('TNAME').AsString:=string(cbDictName.Items.Objects[cbDictName.ItemIndex]);
+ DMMain.DictTempQ.ParamByName('TNAME').AsString:=Ansistring(cbDictName.Items.Objects[cbDictName.ItemIndex]);
  DMMain.DictTempQ.Open;
  DMMain.DictTempQ.First;
  while not DMMain.DictTempQ.Eof do
  begin
    DMMain.TempQ.Close;
-   DMMain.TempQ.SQL.Text:='UPDATE '+ DMMain.DictTempQ.FieldByName('DTABLE').AsString+' SET '+DMMain.DictTempQ.FieldByName('DFIELD').AsString+' = '+
-   DMMain.DataFromDictQ.FieldByName(string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'ID').AsString+' WHERE '+DMMain.DictTempQ.FieldByName('DFIELD').AsString+SqlStr;
+   DMMain.TempQ.SQL.Text:=
+   'UPDATE '+
+   string(DMMain.DictTempQ.FieldByName('DTABLE').AsString)+
+   ' SET '+
+   string(DMMain.DictTempQ.FieldByName('DFIELD').AsString)+
+   ' = '+
+   string(DMMain.DataFromDictQ.FieldByName(AnsiString(string(cbDictName.Items.Objects[cbDictName.ItemIndex]))+'ID').AsString)+' WHERE '+
+   string(DMMain.DictTempQ.FieldByName('DFIELD').AsString)+SqlStr;
    DMMain.TempQ.ExecSQL;
    DMMain.DictTempQ.Next;
  end;
@@ -184,10 +191,10 @@ begin
   DMMain.DataFromDictQ.FieldsVisible.Add(string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'ID=FALSE');
   DMMain.DataFromDictQ.FieldsVisible.Add(string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'=TRUE');
   DMMain.DataFromDictQ.FieldsVisible.Add('ISACTIVE=FALSE');
-  DMMain.FieldNameQ.ParamByName('TABLENAME').AsString:=string(cbDictName.Items.Objects[cbDictName.ItemIndex]);
+  DMMain.FieldNameQ.ParamByName('TABLENAME').AsString:=Ansistring(cbDictName.Items.Objects[cbDictName.ItemIndex]);
   DMMain.FieldNameQ.Open;
   DMMain.DataFromDictQ.FieldsGridLabel.Clear;
-  DMMain.DataFromDictQ.FieldsGridLabel.Add(string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'='+DMMain.FieldNameQ.FieldByName('FIELDNAME').AsString);
+  DMMain.DataFromDictQ.FieldsGridLabel.Add(string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'='+string(DMMain.FieldNameQ.FieldByName('FIELDNAME').AsString));
   DMMain.DataFromDictQ.Open;
 end;
 
@@ -214,8 +221,8 @@ begin
   SL:=TStringList.Create;
   while not DMMain.TempQ.Eof do
     begin
-      SL.Add(DMMain.TempQ.FieldByName('DICTNAME').AsString);
-      cbDictName.AddItem(AnsiUpperCase(DMMain.TempQ.FieldByName('RDB$DESCRIPTION').AsString),TObject(SL.Strings[SL.Count-1]));
+      SL.Add(string(DMMain.TempQ.FieldByName('DICTNAME').AsString));
+      cbDictName.AddItem(AnsiUpperCase(string(DMMain.TempQ.FieldByName('RDB$DESCRIPTION').AsString)),TObject(SL.Strings[SL.Count-1]));
       DMMain.TempQ.Next;
     end;
   cbDictName.ItemIndex:=0;
@@ -236,7 +243,7 @@ begin
  end;
   if not DMMain.DataFromDictQ.IsEmpty and Assigned(SS) and (SS.Count>0)  then
   begin
-    if SS.IndexOf(IntToStr(cbDictName.ItemIndex)+':'+gridDict.DataSource.Dataset.BufferFieldByName(string(cbDictName.Items.Objects[cbDictName.ItemIndex])+'ID').AsString)>=0 then
+    if SS.IndexOf(IntToStr(cbDictName.ItemIndex)+':'+string(gridDict.DataSource.Dataset.BufferFieldByName(AnsiString(string(cbDictName.Items.Objects[cbDictName.ItemIndex]))+'ID').AsString))>=0 then
     begin gridDict.Canvas.Brush.Color:=clLime;aUnion.Enabled:=True end else
     gridDict.Canvas.Brush.Color:=clWindow;
    end;

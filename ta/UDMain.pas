@@ -3,7 +3,7 @@ unit UDMain;
 interface
 
 uses
-  SysUtils, Classes, IB_Components,Windows, IB_Access;
+  SysUtils, Classes, IB_Components,Windows, IB_Access,ExcelXP;
 
 type
   TDMMain = class(TDataModule)
@@ -33,7 +33,7 @@ type
     FNameList,CarMarksList,PostList:TStrings;
     Function GetUserFIO(UserID:Integer): String;
     procedure ta_extractres(DllName,ResName,FExportFileName:Pchar);
-    procedure ta_printorder(OrderID:Integer);
+    procedure ta_printorder(OrderID:Integer;XLApp:TExcelApplication);
     procedure LoadGrants(const MODULE: WideString; FForm,GID: Integer);
   end;
 
@@ -72,9 +72,9 @@ begin
     FreeLibrary(Handle);
   end;
 end;
-procedure TDMMain.ta_printorder(OrderID: Integer);
+procedure TDMMain.ta_printorder(OrderID: Integer;XLApp:TExcelApplication);
 var
-  Proc: procedure(orderid,dbhandle:integer); stdcall;
+  Proc: procedure(orderid,dbhandle:integer;XLApp:TExcelApplication); stdcall;
   Handle: THandle;
 begin
   Handle := LoadLibrary('tareport.dll');
@@ -82,7 +82,7 @@ begin
   begin
     @Proc := GetProcAddress(Handle, 'ta_printorder');
     if @Proc <> nil then
-      Proc(orderid,Integer(IBC.dbHandle));
+      Proc(orderid,Integer(IBC.dbHandle),XLApp);
     FreeLibrary(Handle);
   end;
 end;
@@ -99,7 +99,7 @@ begin
   DMMain.TempQ.ParamByName('UID').AsInteger:=UserID;
   DMMain.TempQ.Open;
   if DMMain.TempQ.RecordCount>0 then
-  Result:=DMMain.TempQ.FieldByName('USERNAME').AsString;
+  Result:=string(DMMain.TempQ.FieldByName('USERNAME').AsString);
   DMMain.TempQ.Close;
 end;
 end.

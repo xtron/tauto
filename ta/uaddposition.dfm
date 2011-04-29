@@ -89,7 +89,6 @@ object FAddPosition: TFAddPosition
     AutoCompleteDelay = 1500
     Style = csDropDownList
     CharCase = ecUpperCase
-    ItemHeight = 13
     MaxLength = 100
     TabOrder = 4
   end
@@ -128,6 +127,8 @@ object FAddPosition: TFAddPosition
       Height = 25
       Action = aSave
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 0
     end
     object bCancel: TPngBitBtn
@@ -137,6 +138,8 @@ object FAddPosition: TFAddPosition
       Height = 25
       Action = aCancel
       Caption = #1054#1090#1084#1077#1085#1072
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 1
     end
   end
@@ -161,7 +164,6 @@ object FAddPosition: TFAddPosition
     AutoCompleteDelay = 1500
     Style = csDropDownList
     CharCase = ecUpperCase
-    ItemHeight = 13
     ItemIndex = 0
     TabOrder = 5
     Text = #1053#1045' '#1054#1041#1056#1040#1041#1054#1058#1040#1053#1054
@@ -185,6 +187,8 @@ object FAddPosition: TFAddPosition
   object PngImageList: TPngImageList
     PngImages = <
       item
+        Background = clWindow
+        Name = 'PngImage8'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002524944415478DA95934D48625114C78FF999961FB49016CECE858BE0
@@ -207,10 +211,10 @@ object FAddPosition: TFAddPosition
           E0FE1E8E4E4F718FD085428105180C86AA5028D4E2FB3EEB83B7D4EFF721954A
           C1CBCB0BBAB8B8784F00FFD3CE333D3F3F7F67CA403F0160C50A20A9EE050D00
           00000049454E44AE426082}
-        Name = 'PngImage8'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage4'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002604944415478DAA5914F68D36018C6DF2F694C62D535B09E320FAB5D
@@ -233,8 +237,6 @@ object FAddPosition: TFAddPosition
           AC81B9465506C33C23BB3D7BC4D4DA97CC64325BA98AB41370B2527DA347F8B1
           B2ACDC4CABD519D821E79DDCAD27D9FCB8BDAA2DCD7F6E3B1BBA9F2B8C90DD6B
           D6F82FE717F6720120E939C7B90000000049454E44AE426082}
-        Name = 'PngImage4'
-        Background = clWindow
       end>
     Left = 16
     Top = 72

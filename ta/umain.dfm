@@ -3,7 +3,7 @@ object FMain: TFMain
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = #1058#1088#1086#1103' '#1040#1074#1090#1086' 1.0'
-  ClientHeight = 51
+  ClientHeight = 55
   ClientWidth = 643
   Color = clBtnFace
   Constraints.MaxHeight = 85
@@ -23,13 +23,13 @@ object FMain: TFMain
     Left = 0
     Top = 0
     Width = 643
-    Height = 24
+    Height = 23
     UseSystemFont = False
     ActionManager = ActionManager
     Caption = 'ActionMainMenuBar'
-    ColorMap.HighlightColor = 15660791
+    ColorMap.HighlightColor = 14737632
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 15660791
+    ColorMap.UnusedColor = 14737632
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -39,14 +39,14 @@ object FMain: TFMain
   end
   object ActionToolBar1: TActionToolBar
     Left = 0
-    Top = 24
+    Top = 23
     Width = 643
     Height = 26
     ActionManager = ActionManager
     Caption = 'ActionToolBar'
-    ColorMap.HighlightColor = 15660791
+    ColorMap.HighlightColor = 14737632
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 15660791
+    ColorMap.UnusedColor = 14737632
     Spacing = 0
   end
   object ActionManager: TActionManager
@@ -186,6 +186,8 @@ object FMain: TFMain
   object PngImageList: TPngImageList
     PngImages = <
       item
+        Background = clWindow
+        Name = 'PngImage0'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000000097048597300000B1300000B1301009A9C1800000A4F694343505068
@@ -300,10 +302,10 @@ object FMain: TFMain
           E1C2DB690FD881E97B425375F05AACC18E5D78FFF0FF8F8ABD2D5D8548E6A13E
           3CEBF91EF0C22BF6C237120502F0DD2AF224B26D4B4E3F01DC94E5097467EE2E
           0000000049454E44AE426082}
-        Name = 'PngImage0'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage1'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002AD4944415478DA8DD16D4853611407F0FFDDEEDCE61C8AE82A532B32
@@ -329,10 +331,10 @@ object FMain: TFMain
           11A026E1F5322EEBD840E7C89BFAEB18EDEAC732F56B079280C49C43844AB3F6
           DBCCF8845C2985C734F219D68F06AC50DF01AE372A2023A664A4000000004945
           4E44AE426082}
-        Name = 'PngImage1'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage2'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           610000030B4944415478DA75535B485451145D771E3E6794B9634E8EAF9CD47C
@@ -361,10 +363,10 @@ object FMain: TFMain
           1AC4657B398BFDC916415D5DDD239FCF276869A72C2F9680C1F7472714A48424
           045399A68EBC4CCDFEBE51D372C7F507436FADF90A0E61350000000049454E44
           AE426082}
-        Name = 'PngImage2'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage3'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002784944415478DA6D934D685A4110C7E7F949342AA22F6AFC281210F4
@@ -388,10 +390,10 @@ object FMain: TFMain
           CACA1BBFDFFF9D64659F23E0D8DFDFE7E3F1F8876C36FBFBC56EC4B1BEBEAE70
           3A9D3E87C3B16CB7DB2D78E55AADF6973CE11129602A9D4EDF4DFBFF0394AB3E
           204E73D0830000000049454E44AE426082}
-        Name = 'PngImage3'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage4'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000000097048597300000B1300000B1301009A9C1800000A4F694343505068
@@ -508,10 +510,10 @@ object FMain: TFMain
           05310E92DC580929810DEB9EEBF0FAFCD1159AFD0CA169FA095D84C46231C071
           1C4892041445572700891281611832714791D0E7FE0393A28BB90E4893810000
           000049454E44AE426082}
-        Name = 'PngImage4'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage5'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000000097048597300000B1300000B1301009A9C1800000A4F694343505068
@@ -626,10 +628,10 @@ object FMain: TFMain
           D5F72BBBE209B437DC375C6EB468789E0F7A3C9E9E4422E12349B22822A13683
           A0D5BB94135748AC04B0110591418941A45906463677B4B1A9F93DAFD73B188F
           C76737C38AFD0BBCD392B71DB343290000000049454E44AE426082}
-        Name = 'PngImage5'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage6'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002D64944415478DA95535D489361143EDB5C73FBF6FFBF39F7D36CB672
@@ -656,10 +658,10 @@ object FMain: TFMain
           827DC43BB3CCC880D198011EE545D77D53BE6BFFBC4CA80D7387B67A404A10CA
           28933731EEF77622F797FFD946525B965028CFADAF2FFC6D9DBF03ADEC02C059
           9023950000000049454E44AE426082}
-        Name = 'PngImage6'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage7'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000001F74944415478DAA592DF8B616118C79F718529931F372E14DA0BA5B6
@@ -679,10 +681,10 @@ object FMain: TFMain
           66A4021C8CABC1BBC76B44CF18E4723939E8C53E4722912F17009FCF4759AD56
           4628149E878885DC17FBD17D8B56FA3B93C97CCB66B38F1780FFB117B2203D20
           0B2CAB330000000049454E44AE426082}
-        Name = 'PngImage7'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage8'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000001D04944415478DA6364C003DADADA6A3F7EFC58F6E2C58BAFEFDEBDCB
@@ -701,8 +703,6 @@ object FMain: TFMain
           F9E128C158B0B6B69605A646750101818942424267A74C99120755FB9FA8688C
           8C8C4C036AEC0306E61B607824969696EEC715DD00D11ADC11CFC7AC32000000
           0049454E44AE426082}
-        Name = 'PngImage8'
-        Background = clWindow
       end>
     Left = 552
     Top = 24

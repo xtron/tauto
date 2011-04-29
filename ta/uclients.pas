@@ -102,10 +102,10 @@ begin
   if DMMain.TempQ.RecordCount>0 then
   begin
     ELname.Tag:=ClientID;
-    ELName.Text:=DMMain.TempQ.FieldByName('LNAME').AsString;
+    ELName.Text:=string(DMMain.TempQ.FieldByName('LNAME').AsString);
     cbFName.ItemIndex:=cbFName.Items.IndexOfObject(TObject(DMMain.TempQ.FieldByName('FNAMEID').AsInteger));
-    EMName.Text:=DMMain.TempQ.FieldByName('MNAME').AsString;
-    EContacts.Text:=DMMain.TempQ.FieldByName('CONTACTS').AsString;
+    EMName.Text:=string(DMMain.TempQ.FieldByName('MNAME').AsString);
+    EContacts.Text:=string(DMMain.TempQ.FieldByName('CONTACTS').AsString);
     pUserFIO.Caption:='Редактировалось: '+ DMMain.GetUserFIO(DMMain.TempQ.FieldByName('USERID').AsInteger);
     pClient.Enabled:=False;
     DMMain.OrdersQ.Close;
@@ -227,17 +227,17 @@ begin
  OrderID:=DMMain.OrdersQ.FieldByName('ORDERID').AsInteger;
  FAddOrders:=TFAddOrders.Create(self);
  FAddOrders.Caption:='Изменение заказа';
- FAddOrders.pOrderNum.Caption:=DMMain.OrdersQ.FieldByName('ORDERID').AsString;
- FAddOrders.pOrderData.Caption:=DMMain.OrdersQ.FieldByName('ORDERDATE').AsString;
+ FAddOrders.pOrderNum.Caption:=string(DMMain.OrdersQ.FieldByName('ORDERID').AsString);
+ FAddOrders.pOrderData.Caption:=string(DMMain.OrdersQ.FieldByName('ORDERDATE').AsString);
  FAddOrders.pClientInfo.Caption:=eLName.Text+' '+cbFName.Text+' '+EMName.Text;
  FAddOrders.cbCarMarks.Items.Assign(DMMain.CarMarksList);
  FAddOrders.cbCarMarks.ItemIndex:=FaddOrders.cbCarMarks.Items.IndexOfObject(TObject(DMMain.OrdersQ.FieldByName('CARMARKSID').AsInteger));
- FAddOrders.EYear.Text:=DMMain.OrdersQ.FieldByName('CARYEAR').AsString;
- FAddOrders.EModel.Text:=DMMain.OrdersQ.FieldByName('MODEL').AsString;
+ FAddOrders.EYear.Text:=string(DMMain.OrdersQ.FieldByName('CARYEAR').AsString);
+ FAddOrders.EModel.Text:=string(DMMain.OrdersQ.FieldByName('MODEL').AsString);
  FAddOrders.pUserFIO.Caption:='Редактировалось: '+ DMMain.GetUserFIO(DMMain.OrdersQ.FieldByName('USERID').AsInteger);
- FAddOrders.EVin.Text:=DMMain.OrdersQ.FieldByName('VIN').AsString;
- FAddOrders.ECarBase.Text:=DMMain.OrdersQ.FieldByName('CARBASE').AsString;
- FAddOrders.EEngine.Text:=DMMain.OrdersQ.FieldByName('ENGINE').AsString;
+ FAddOrders.EVin.Text:=string(DMMain.OrdersQ.FieldByName('VIN').AsString);
+ FAddOrders.ECarBase.Text:=string(DMMain.OrdersQ.FieldByName('CARBASE').AsString);
+ FAddOrders.EEngine.Text:=string(DMMain.OrdersQ.FieldByName('ENGINE').AsString);
  FAddOrders.cbTransmission.ItemIndex:=DMMain.OrdersQ.FieldByName('TRANSMISSION').AsInteger;
  FAddOrders.cbDrive.ItemIndex:=DMMain.OrdersQ.FieldByName('DRIVE').AsInteger;
  FAddOrders.cAvance.Value:=DMMain.OrdersQ.FieldByName('AVANCE').AsFloat;
@@ -254,11 +254,11 @@ begin
   DMMain.OrdersQ.FieldByName('USERID').AsInteger:=UID;
   DMMain.OrdersQ.FieldByName('STATUS').AsInteger:=0;
   DMMain.OrdersQ.FieldByName('CARMARKSID').AsInteger:=Integer(FAddOrders.cbCarMarks.Items.Objects[FAddOrders.cbCarMarks.ItemIndex]);
-  if Length(FAddOrders.EYear.Text)>0    then  DMMain.OrdersQ.FieldByName('CARYEAR').AsString:=FAddOrders.EYear.Text     else DMMain.OrdersQ.FieldByName('CARYEAR').Clear;
-  if Length(FAddOrders.EModel.Text)>0   then  DMMain.OrdersQ.FieldByName('MODEL').AsString:=FAddOrders.EModel.Text       else DMMain.OrdersQ.FieldByName('MODEL').Clear;
-  if Length(FAddOrders.EVin.Text)>0     then  DMMain.OrdersQ.FieldByName('VIN').AsString:=FAddOrders.EVin.Text          else DMMain.OrdersQ.FieldByName('VIN').Clear;
-  if Length(FAddOrders.ECarBase.Text)>0 then  DMMain.OrdersQ.FieldByName('CARBASE').AsString:=FAddOrders.ECarBase.Text  else DMMain.OrdersQ.FieldByName('CARBASE').Clear;
-  if Length(FAddOrders.EEngine.Text)>0  then  DMMain.OrdersQ.FieldByName('ENGINE').AsString:=FAddOrders.EEngine.Text    else DMMain.OrdersQ.FieldByName('ENGINE').Clear;
+  if Length(FAddOrders.EYear.Text)>0    then  DMMain.OrdersQ.FieldByName('CARYEAR').AsString:=AnsiString(FAddOrders.EYear.Text)     else DMMain.OrdersQ.FieldByName('CARYEAR').Clear;
+  if Length(FAddOrders.EModel.Text)>0   then  DMMain.OrdersQ.FieldByName('MODEL').AsString:=AnsiString(FAddOrders.EModel.Text)       else DMMain.OrdersQ.FieldByName('MODEL').Clear;
+  if Length(FAddOrders.EVin.Text)>0     then  DMMain.OrdersQ.FieldByName('VIN').AsString:=AnsiString(FAddOrders.EVin.Text)          else DMMain.OrdersQ.FieldByName('VIN').Clear;
+  if Length(FAddOrders.ECarBase.Text)>0 then  DMMain.OrdersQ.FieldByName('CARBASE').AsString:=AnsiString(FAddOrders.ECarBase.Text)  else DMMain.OrdersQ.FieldByName('CARBASE').Clear;
+  if Length(FAddOrders.EEngine.Text)>0  then  DMMain.OrdersQ.FieldByName('ENGINE').AsString:=AnsiString(FAddOrders.EEngine.Text)    else DMMain.OrdersQ.FieldByName('ENGINE').Clear;
   DMMain.OrdersQ.FieldByName('TRANSMISSION').AsInteger:=FAddOrders.cbTransmission.ItemIndex;
   DMMain.OrdersQ.FieldByName('DRIVE').AsInteger:=FAddOrders.cbDrive.ItemIndex;
   if FAddOrders.cAvance.Value>0 then
@@ -332,11 +332,11 @@ begin
  begin
  DMMain.OrdersQ.Edit;
  DMMain.OrdersQ.FieldByName('CARMARKSID').AsInteger:=Integer(FAddOrders.cbCarMarks.Items.Objects[FAddOrders.cbCarMarks.ItemIndex]);
- if Length(FAddOrders.EYear.Text)>0    then  DMMain.OrdersQ.FieldByName('CARYEAR').AsString:=FAddOrders.EYear.Text     else DMMain.OrdersQ.FieldByName('CARYEAR').Clear;
- if Length(FAddOrders.EModel.Text)>0   then  DMMain.OrdersQ.FieldByName('MODEL').AsString:=FAddOrders.EModel.Text       else DMMain.OrdersQ.FieldByName('MODEL').Clear;
- if Length(FAddOrders.EVin.Text)>0     then  DMMain.OrdersQ.FieldByName('VIN').AsString:=FAddOrders.EVin.Text          else DMMain.OrdersQ.FieldByName('VIN').Clear;
- if Length(FAddOrders.ECarBase.Text)>0 then  DMMain.OrdersQ.FieldByName('CARBASE').AsString:=FAddOrders.ECarBase.Text  else DMMain.OrdersQ.FieldByName('CARBASE').Clear;
- if Length(FAddOrders.EEngine.Text)>0  then  DMMain.OrdersQ.FieldByName('ENGINE').AsString:=FAddOrders.EEngine.Text    else DMMain.OrdersQ.FieldByName('ENGINE').Clear;
+ if Length(FAddOrders.EYear.Text)>0    then  DMMain.OrdersQ.FieldByName('CARYEAR').AsString:=AnsiString(FAddOrders.EYear.Text)     else DMMain.OrdersQ.FieldByName('CARYEAR').Clear;
+ if Length(FAddOrders.EModel.Text)>0   then  DMMain.OrdersQ.FieldByName('MODEL').AsString:=AnsiString(FAddOrders.EModel.Text)       else DMMain.OrdersQ.FieldByName('MODEL').Clear;
+ if Length(FAddOrders.EVin.Text)>0     then  DMMain.OrdersQ.FieldByName('VIN').AsString:=AnsiString(FAddOrders.EVin.Text)          else DMMain.OrdersQ.FieldByName('VIN').Clear;
+ if Length(FAddOrders.ECarBase.Text)>0 then  DMMain.OrdersQ.FieldByName('CARBASE').AsString:=AnsiString(FAddOrders.ECarBase.Text)  else DMMain.OrdersQ.FieldByName('CARBASE').Clear;
+ if Length(FAddOrders.EEngine.Text)>0  then  DMMain.OrdersQ.FieldByName('ENGINE').AsString:=AnsiString(FAddOrders.EEngine.Text)    else DMMain.OrdersQ.FieldByName('ENGINE').Clear;
  DMMain.OrdersQ.FieldByName('TRANSMISSION').AsInteger:=FAddOrders.cbTransmission.ItemIndex;
  DMMain.OrdersQ.FieldByName('DRIVE').AsInteger:=FAddOrders.cbDrive.ItemIndex;
  if FAddOrders.cAvance.Value>0 then
@@ -364,13 +364,13 @@ var
     TempDir: String;
     Buffer : PChar;
 begin
-    getmem(Buffer,MAX_PATH);
-    GetTempPath(Max_PATH,Buffer);
+    getmem(Buffer,MAX_PATH*sizeof(PCHAR));
+    GetTempPath(Max_PATH*sizeof(PCHAR),Buffer);
     TempDir:=Buffer;
-    freemem(Buffer,MAX_PATH);
-    DeleteFile(PansiChar(TempDir+ 'order.xls'));
-    DMMain.ta_extractres(PAnsiChar('tareport.dll'), PAnsiChar('XLS_ORDER'), PAnsiChar(TempDir+ 'order.xls'));
-    DMMain.ta_printorder( DMMain.OrdersQ.FieldByName('ORDERID').AsInteger);
+    freemem(Buffer,MAX_PATH*sizeof(PCHAR));
+    DeleteFile(PChar(TempDir+ 'order.xls'));
+    DMMain.ta_extractres(PChar('tareport.dll'), PChar('XLS_ORDER'), PChar(TempDir+ 'order.xls'));
+    DMMain.ta_printorder( DMMain.OrdersQ.FieldByName('ORDERID').AsInteger,FMain.XLApp);
 end;
 
 //Сохранение редактирования либо добавления клиента-----------------------------
@@ -395,10 +395,10 @@ begin
   end;
   DMMain.TempQ.ParamByName('CID').AsInteger:=ClientID;
   DMMain.TempQ.ParamByName('UID').AsInteger:=UID;
-  DMMain.TempQ.ParamByName('LNAME').AsString:=ELName.Text;
+  DMMain.TempQ.ParamByName('LNAME').AsString:=AnsiString(ELName.Text);
   DMMain.TempQ.ParamByName('FNAMEID').AsInteger:=Integer(cbFname.Items.Objects[cbFname.ItemIndex]);
-  DMMain.TempQ.ParamByName('MNAME').AsString:=EMName.Text;
-  DMMain.TempQ.ParamByName('CONTACTS').AsString:=EContacts.Text;
+  DMMain.TempQ.ParamByName('MNAME').AsString:=AnsiString(EMName.Text);
+  DMMain.TempQ.ParamByName('CONTACTS').AsString:=AnsiString(EContacts.Text);
   DMMain.TempQ.ExecSQL;
   DMMain.TempQ.Close;
   DMMain.IBT.Commit;

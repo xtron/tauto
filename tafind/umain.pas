@@ -5,8 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, IB_Grid, UdcIB_Grid, StdCtrls, UdcEdit, ComCtrls, ExtCtrls,
-  Mask, ToolEdit, UdcDateEdit, ActnList, ImgList, PngImageList, Buttons,
-  PngBitBtn;
+  Mask,  UdcDateEdit, ActnList, ImgList, PngImageList, Buttons,
+  PngBitBtn, rxToolEdit;
 
 type
   TFMain = class(TForm)

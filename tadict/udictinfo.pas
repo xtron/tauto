@@ -4,10 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, UdcEdit, LMDCustomButton, LMDButton, UdcButton, ExtCtrls,
-  UdcPanel, ActnList, Buttons, PngBitBtn, ImgList, PngImageList, LMDControl,
-  LMDCustomControl, LMDCustomPanel, LMDButtonControl, LMDCustomCheckBox,
-  LMDCheckBox, UdcCheckBox;
+  Dialogs, StdCtrls, UdcEdit,  UdcButton, ExtCtrls,
+  UdcPanel, ActnList, Buttons, PngBitBtn, ImgList, PngImageList, UdcCheckBox;
 
 type
   TFDictInfo = class(TForm)
@@ -73,10 +71,14 @@ begin
       if pActive.Visible then isactivestr:=' ,ISACTIVE='''+IntToStr(Integer(cbActive.Checked))+'''' else isactivestr:='';
 
       DMMain.DictTempQ.Close;
-      DMMain.DictTempQ.SQL.Text:='UPDATE '+string(FMain.cbDictName.Items.Objects[FMain.cbDictName.ItemIndex])+
-                                 ' SET '+string(FMain.cbDictName.Items.Objects[FMain.cbDictName.ItemIndex])+'='''+
-                                 editValue.Text+''''+isactivestr+' WHERE '+string(FMain.cbDictName.Items.Objects[FMain.cbDictName.ItemIndex])+'ID='+
-                                 DMMain.DataFromDictQ.FieldByName(string(FMain.cbDictName.Items.Objects[FMain.cbDictName.ItemIndex])+'ID').AsString;
+      DMMain.DictTempQ.SQL.Text:='UPDATE '+
+      string(FMain.cbDictName.Items.Objects[FMain.cbDictName.ItemIndex])+
+      ' SET '+
+      string(FMain.cbDictName.Items.Objects[FMain.cbDictName.ItemIndex])+
+      '='''+
+      editValue.Text+''''+isactivestr+' WHERE '+
+      string(FMain.cbDictName.Items.Objects[FMain.cbDictName.ItemIndex])+'ID='+
+      string(DMMain.DataFromDictQ.FieldByName(AnsiString(string(FMain.cbDictName.Items.Objects[FMain.cbDictName.ItemIndex]))+'ID').AsString);
       DMMain.DictTempQ.Execute;
       DMMain.IBT.CommitRetaining;
     end;
@@ -97,7 +99,12 @@ end;
 procedure TFDictInfo.FormShow(Sender: TObject);
 begin
   if self.Tag=mfInsert then editValue.Text:=''
-  else editValue.Text:=DMMain.DataFromDictQ.FieldByName(string(FMain.cbDictName.Items.Objects[FMain.cbDictName.ItemIndex])).AsString;
+  else
+  begin
+   editValue.Text:=string(
+   DMMain.DataFromDictQ.FieldByName(AnsiString(string(string(FMain.cbDictName.Items.Objects[FMain.cbDictName.ItemIndex])))).AsString);
+
+  end;
   if editValue.CanFocus then editValue.SetFocus;
 end;
 

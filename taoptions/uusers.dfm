@@ -34,6 +34,8 @@ object FUsers: TFUsers
       Action = aSave
       Anchors = [akTop, akRight]
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 0
     end
     object bCancel: TPngBitBtn
@@ -44,6 +46,8 @@ object FUsers: TFUsers
       Action = aCancel
       Anchors = [akTop, akRight]
       Caption = #1054#1090#1084#1077#1085#1072
+      DoubleBuffered = True
+      ParentDoubleBuffered = False
       TabOrder = 1
     end
   end
@@ -79,6 +83,8 @@ object FUsers: TFUsers
         Height = 25
         Action = aAddUser
         Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+        DoubleBuffered = True
+        ParentDoubleBuffered = False
         TabOrder = 1
       end
       object bEditUser: TPngBitBtn
@@ -88,6 +94,8 @@ object FUsers: TFUsers
         Height = 25
         Action = aEditUser
         Caption = #1048#1079#1084#1077#1085#1080#1090#1100
+        DoubleBuffered = True
+        ParentDoubleBuffered = False
         TabOrder = 2
       end
       object bDelUser: TPngBitBtn
@@ -97,6 +105,8 @@ object FUsers: TFUsers
         Height = 25
         Action = aDelUser
         Caption = #1059#1076#1072#1083#1080#1090#1100
+        DoubleBuffered = True
+        ParentDoubleBuffered = False
         TabOrder = 3
       end
     end
@@ -140,6 +150,8 @@ object FUsers: TFUsers
           ListBoxStyle = True
           IndicateRow = False
           OnCellDblClick = gActionsCellDblClick
+          ExplicitLeft = 151
+          ExplicitTop = 0
         end
         object gModules: TUdcIB_Grid
           Left = 1
@@ -160,6 +172,8 @@ object FUsers: TFUsers
   object PngImageList: TPngImageList
     PngImages = <
       item
+        Background = clWindow
+        Name = 'PngImage8'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002524944415478DA95934D48625114C78FF999961FB49016CECE858BE0
@@ -182,10 +196,10 @@ object FUsers: TFUsers
           E0FE1E8E4E4F718FD085428105180C86AA5028D4E2FB3EEB83B7D4EFF721954A
           C1CBCB0BBAB8B8784F00FFD3CE333D3F3F7F67CA403F0160C50A20A9EE050D00
           00000049454E44AE426082}
-        Name = 'PngImage8'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage4'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000002604944415478DAA5914F68D36018C6DF2F694C62D535B09E320FAB5D
@@ -208,10 +222,10 @@ object FUsers: TFUsers
           AC81B9465506C33C23BB3D7BC4D4DA97CC64325BA98AB41370B2527DA347F8B1
           B2ACDC4CABD519D821E79DDCAD27D9FCB8BDAA2DCD7F6E3B1BBA9F2B8C90DD6B
           D6F82FE717F6720120E939C7B90000000049454E44AE426082}
-        Name = 'PngImage4'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage2'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000000097048597300000B1300000B1301009A9C1800000A4F694343505068
@@ -319,10 +333,10 @@ object FUsers: TFUsers
           DF046E81272BD91395567593E45282B9A9891F4B447C8A201C8C657A64C038D8
           7627E2C8C79E78C52AE806BFFEA74651BC1CA142110CEFF4E08B28D80CF31E6B
           C6EB47D68A7C0FE40FF80D39823B326C27DC3C0000000049454E44AE426082}
-        Name = 'PngImage2'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage3'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000000097048597300000B1300000B1301009A9C1800000A4F694343505068
@@ -432,10 +446,10 @@ object FUsers: TFUsers
           CF9A560E0EB908F454564BB165D4F77A1BBE69DA441AF9C4D64794475441A4FD
           3746DBB5FEB014DA62E493426821A45EF046FD7C794823657B22736C6544E6E9
           D37FDEC14F75C14E5BA206B8860000000049454E44AE426082}
-        Name = 'PngImage3'
-        Background = clWindow
       end
       item
+        Background = clWindow
+        Name = 'PngImage4'
         PngImage.Data = {
           89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
           61000000097048597300000B1300000B1301009A9C1800000A4F694343505068
@@ -543,8 +557,6 @@ object FUsers: TFUsers
           534606038034B5EC902AFBE2434A4247D8CDC699550A194D88C7211D6E9F508C
           BDFCA8F439F4F8EB0EE280BE058F51B1250DE172054C8306C8143438D352E3F3
           58217FEA7E01CFE33EE3708DC1ED0000000049454E44AE426082}
-        Name = 'PngImage4'
-        Background = clWindow
       end>
     Left = 241
     Top = 338

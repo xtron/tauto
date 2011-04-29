@@ -3,7 +3,7 @@ unit UDMain;
 interface
 
 uses
-  SysUtils, Classes, IB_Components;
+  SysUtils, Classes, IB_Components,IB_ACCESS;
 
 type
   TDMMain = class(TDataModule)
